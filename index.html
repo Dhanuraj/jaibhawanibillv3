@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Jai Bhawani Bills</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ── THEMES ── */
+[data-theme="warm"]{--bg:#faf8f4;--bg2:#f3f0ea;--bg3:#ede9e1;--card:#fff;--border:#e8e3d9;--border2:#d9d3c6;--ink:#1e1c18;--ink2:#6b6560;--ink3:#a09a92;--ink4:#c8c2b8;--accent:#e8722a;--accent2:#f0914d;--abg:rgba(232,114,42,.09);--abrd:rgba(232,114,42,.22);--red:#e53935;--rbg:rgba(229,57,53,.08);--rbrd:rgba(229,57,53,.18);--tbg:rgba(250,248,244,.93);--nbg:rgba(255,255,255,.97);--sh:0 2px 16px rgba(0,0,0,.07);--sh2:0 6px 28px rgba(0,0,0,.12);}
+[data-theme="sky"]{--bg:#f0f6ff;--bg2:#e8f0fb;--bg3:#dde8f8;--card:#fff;--border:#d5e3f7;--border2:#bfd4f5;--ink:#0d1b2e;--ink2:#4a6080;--ink3:#8aa4c0;--ink4:#c0d2e6;--accent:#1565c0;--accent2:#1976d2;--abg:rgba(21,101,192,.08);--abrd:rgba(21,101,192,.2);--red:#d32f2f;--rbg:rgba(211,47,47,.08);--rbrd:rgba(211,47,47,.18);--tbg:rgba(240,246,255,.93);--nbg:rgba(255,255,255,.97);--sh:0 2px 16px rgba(21,101,192,.08);--sh2:0 6px 28px rgba(21,101,192,.14);}
+[data-theme="forest"]{--bg:#f2f7f3;--bg2:#e8f1eb;--bg3:#dceae0;--card:#fff;--border:#cfe0d3;--border2:#b8d2bf;--ink:#0d1f13;--ink2:#3d6049;--ink3:#80a88a;--ink4:#b8d2bf;--accent:#1b7a3e;--accent2:#2e9e55;--abg:rgba(27,122,62,.09);--abrd:rgba(27,122,62,.22);--red:#c62828;--rbg:rgba(198,40,40,.08);--rbrd:rgba(198,40,40,.17);--tbg:rgba(242,247,243,.93);--nbg:rgba(255,255,255,.97);--sh:0 2px 16px rgba(27,122,62,.08);--sh2:0 6px 28px rgba(27,122,62,.14);}
+[data-theme="dark"]{--bg:#0f0f14;--bg2:#16161e;--bg3:#1e1e28;--card:#1c1c26;--border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);--ink:#ededf0;--ink2:#8888a0;--ink3:#505065;--ink4:#333344;--accent:#7c6ff7;--accent2:#9b8ff9;--abg:rgba(124,111,247,.12);--abrd:rgba(124,111,247,.28);--red:#ff5c5c;--rbg:rgba(255,92,92,.10);--rbrd:rgba(255,92,92,.22);--tbg:rgba(15,15,20,.9);--nbg:rgba(22,22,30,.97);--sh:0 2px 16px rgba(0,0,0,.45);--sh2:0 6px 32px rgba(0,0,0,.6);}
+[data-theme="rose"]{--bg:#fff5f7;--bg2:#ffe8ed;--bg3:#fdd8e0;--card:#fff;--border:#f8c8d0;--border2:#f0aab6;--ink:#2d0a12;--ink2:#8c3a4e;--ink3:#c07888;--ink4:#e8b0bc;--accent:#d81b60;--accent2:#e91e8c;--abg:rgba(216,27,96,.09);--abrd:rgba(216,27,96,.22);--red:#b71c1c;--rbg:rgba(183,28,28,.08);--rbrd:rgba(183,28,28,.17);--tbg:rgba(255,245,247,.93);--nbg:rgba(255,255,255,.97);--sh:0 2px 16px rgba(216,27,96,.08);--sh2:0 6px 28px rgba(216,27,96,.14);}
+
+/* ── BASE ── */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-height:100%;transition:background .3s,color .3s}
+.app{width:100%;max-width:430px;margin:0 auto;min-height:100vh;padding-bottom:82px;position:relative}
+
+/* ── SCREENS ── */
+.screen{display:none}
+.screen.active{display:block;animation:su .26s ease both}
+@keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── TOPBAR ── */
+.topbar{position:sticky;top:0;z-index:60;padding:12px 16px;display:flex;align-items:center;gap:10px;background:var(--tbg);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:var(--sh)}
+.tb-back{width:36px;height:36px;border-radius:10px;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink2);font-size:20px;transition:all .15s;flex-shrink:0}
+.tb-back:active{background:var(--bg3)}
+.tb-title{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;flex:1;color:var(--ink)}
+.tb-logo-wrap{display:flex;align-items:center;gap:9px;flex:1}
+.tb-logo-icon{width:36px;height:36px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 2px 10px var(--abrd);flex-shrink:0}
+.tb-logo-name{font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--ink);line-height:1.1}
+.tb-logo-name span{color:var(--accent)}
+.tb-logo-tagline{font-size:10px;color:var(--ink3);font-weight:600}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;transition:all .15s;white-space:nowrap;-webkit-user-select:none;user-select:none}
+.btn:active{transform:scale(.94)}
+.btn-a{background:var(--accent);color:#fff;border-radius:10px;padding:10px 16px;font-size:13px;box-shadow:0 2px 10px var(--abrd)}
+.btn-g{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border2);border-radius:10px;padding:10px 14px;font-size:13px}
+.btn-r{background:var(--rbg);color:var(--red);border:1.5px solid var(--rbrd);border-radius:10px;padding:10px 14px;font-size:13px}
+.btn-wa{background:#25d366;color:#fff;border:none;border-radius:10px;padding:10px 14px;font-size:13px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+.btn-wa:active{transform:scale(.94);background:#1ebe5d}
+.btn-sm{padding:7px 12px;font-size:12px;border-radius:8px}
+.btn-xs{padding:5px 9px;font-size:11px;border-radius:7px}
+.btn-ic{width:34px;height:34px;padding:0;border-radius:9px;font-size:14px}
+
+/* ── HOME ── */
+.home-hd{padding:22px 16px 14px;background:linear-gradient(160deg,var(--card) 60%,var(--bg2));border-bottom:1px solid var(--border)}
+.hd-greet{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:4px}
+.hd-title{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--ink);line-height:1.2;margin-bottom:4px}
+.hd-title span{color:var(--accent)}
+.hd-sub{font-size:13px;color:var(--ink2);line-height:1.5}
+.stats-bar{display:flex;gap:12px;padding:14px 16px}
+.stat-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--sh);position:relative;overflow:hidden}
+.stat-box::after{content:'';position:absolute;top:0;left:20%;right:20%;height:3px;background:var(--accent);border-radius:0 0 4px 4px;opacity:.7}
+.stat-n{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;color:var(--accent);line-height:1}
+.stat-l{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.menu-grid{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.menu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:15px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .18s;box-shadow:var(--sh);-webkit-user-select:none;user-select:none}
+.menu-card:active{transform:scale(.98);box-shadow:none}
+.menu-card.ft{background:linear-gradient(135deg,var(--abg),var(--bg2));border-color:var(--abrd)}
+.mc-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.mc-icon.a{background:var(--abg);border:1.5px solid var(--abrd)}
+.mc-icon.r{background:var(--rbg);border:1.5px solid var(--rbrd)}
+.mc-icon.g{background:rgba(46,125,82,.1);border:1.5px solid rgba(46,125,82,.2)}
+.mc-icon.k{background:var(--bg2);border:1.5px solid var(--border2)}
+.mc-info{flex:1}.mc-t{font-weight:800;font-size:15px;color:var(--ink);margin-bottom:2px}.mc-s{font-size:12px;color:var(--ink3);line-height:1.4}
+.mc-arr{width:28px;height:28px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:16px}
+
+/* ── BILL SCREEN ── */
+/* PARTY NAME TOGGLE CARD */
+.toggle-card{
+  margin:14px 16px 0;
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:14px;overflow:hidden;box-shadow:var(--sh);
+}
+.toggle-row{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:background .14s}
+.toggle-row:active{background:var(--bg2)}
+.tr-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tr-icon.blue{background:rgba(21,101,192,.1);border:1.5px solid rgba(21,101,192,.2)}
+.tr-icon.orange{background:rgba(249,168,37,.12);border:1.5px solid rgba(249,168,37,.25)}
+.tr-icon.red{background:var(--rbg);border:1.5px solid var(--rbrd)}
+.tr-info{flex:1}
+.tr-title{font-weight:800;font-size:14px;color:var(--ink)}
+.tr-sub{font-size:12px;color:var(--ink3);margin-top:1px;transition:color .2s}
+.tr-sub.on{color:var(--accent)}
+.tog{width:46px;height:26px;border-radius:13px;background:var(--bg3);border:2px solid var(--border2);position:relative;transition:all .22s;flex-shrink:0}
+.tog::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--ink3);transition:all .22s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog.on{background:var(--accent);border-color:var(--accent)}
+.tog.on::after{left:23px;background:#fff}
+.toggle-body{display:none;padding:0 14px 14px;flex-direction:column;gap:8px}
+.toggle-body.open{display:flex;animation:su .2s ease}
+
+/* SECTION HEAD */
+.sec-wrap{padding:14px 16px 8px}
+.sec-hd{display:flex;align-items:center;gap:8px}
+.sec-icon{width:30px;height:30px;border-radius:8px;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-icon.a{background:var(--abg);border:1px solid var(--abrd)}
+.sec-icon.r{background:var(--rbg);border:1px solid var(--rbrd)}
+.sec-lbl{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;flex:1;color:var(--ink)}
+.cnt-chip{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--ink3)}
+
+/* TABLE */
+.tbl-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh);margin:0 16px}
+.tbl-head{display:grid;background:var(--bg2);border-bottom:1.5px solid var(--border);padding:9px 10px}
+.tbl-head.c5{grid-template-columns:minmax(55px,1fr) 82px 48px 82px 26px}
+.tbl-head span{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2)}
+.tbl-head span:nth-child(n+2){text-align:right}
+.rw{border-bottom:1px solid var(--border);transition:background .12s}
+.rw:last-child{border:none}.rw:focus-within{background:var(--abg)}
+.irow{display:grid;align-items:center}
+.irow.c5{grid-template-columns:minmax(55px,1fr) 82px 48px 82px 26px}
+.irow input{background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:var(--ink);padding:12px 7px;width:100%}
+.irow input[type=number]{text-align:right}
+.irow input::placeholder{color:var(--ink4);font-weight:400;font-size:13px}
+.row-amt{font-size:12px;font-weight:900;padding:12px 5px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row-amt.a{color:var(--accent)}.row-amt.r{color:var(--red)}
+.row-del-cell{display:flex;align-items:center;justify-content:center;padding:0 3px}
+.del-btn{width:24px;height:24px;border-radius:6px;border:none;background:transparent;color:var(--ink4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .14s}
+.del-btn:active{background:var(--rbg);color:var(--red)}
+.tbl-add{width:100%;padding:11px;background:transparent;border:none;border-top:1.5px solid var(--border);font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .14s}
+.tbl-add.a{color:var(--accent)}.tbl-add.a:active{background:var(--abg)}
+.tbl-add.r{color:var(--red)}.tbl-add.r:active{background:var(--rbg)}
+
+/* PILL SUBTOTALS */
+.pill{display:flex;justify-content:space-between;align-items:center;margin:10px 16px 0;padding:13px 16px;border-radius:12px;border:1.5px solid;animation:su .2s ease}
+.pill.a{background:var(--abg);border-color:var(--abrd)}
+.pill.r{background:var(--rbg);border-color:var(--rbrd)}
+.pill-lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+.pill-lbl.a{color:var(--accent)}.pill-lbl.r{color:var(--red)}
+.pill-val{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700}
+.pill-val.a{color:var(--accent)}.pill-val.r{color:var(--red)}
+
+.sep{height:1px;background:var(--border);margin:18px 16px 0}
+
+/* FIELD */
+.flbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:6px}
+.inp{background:var(--bg2);border:1.5px solid var(--border2);border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--ink);padding:11px 13px;width:100%;outline:none;transition:all .15s}
+.inp:focus{border-color:var(--accent);background:var(--abg)}
+.inp::placeholder{color:var(--ink4);font-weight:400}
+.pfx-wrap{position:relative}
+.pfx-wrap .pfx{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink3);font-weight:800;font-size:13px;pointer-events:none}
+.pfx-wrap .inp{padding-left:23px}
+
+/* SUMMARY */
+.summary{margin:14px 16px 0;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--sh)}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0}
+.sum-lbl{font-size:14px;color:var(--ink2);font-weight:600}
+.sum-val{font-size:14px;font-weight:800;color:var(--ink)}
+.sum-div{height:1px;background:var(--border);margin:7px 0}
+.sum-row.big .sum-lbl{font-size:15px;font-weight:800;color:var(--ink)}
+.sum-row.big .sum-val{font-size:24px;font-weight:900;color:var(--accent);font-family:'Poppins',sans-serif}
+
+/* COLLECT CARD */
+.collect-card{margin:14px 16px;border-radius:18px;padding:24px 20px;text-align:center;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 6px 24px var(--abrd)}
+.collect-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.1);pointer-events:none}
+.cc-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.22);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.cc-lbl{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:5px;font-weight:600}
+.cc-val{font-family:'Poppins',sans-serif;font-size:44px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1}
+.cc-note{font-size:12px;color:rgba(255,255,255,.65);margin-top:7px}
+
+/* PAYMENT MODE BUTTONS */
+.pay-mode-btn{padding:9px 16px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--ink2);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;-webkit-user-select:none;user-select:none}
+.pay-mode-btn:active{transform:scale(.95)}
+.pay-mode-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 8px var(--abrd)}
+
+/* CTA BUTTONS */
+.bill-cta{display:flex;gap:10px;margin:0 16px 12px;flex-wrap:wrap}
+.bill-cta .btn-g,.bill-cta .btn-a,.bill-cta .btn-wa{flex:1;min-width:80px;justify-content:center;padding:12px 10px;font-size:13px}
+
+/* ── LIBRARY ── */
+.lib-list{padding:12px 16px}
+.lib-item{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);animation:su .2s ease}
+.lib-ico{width:42px;height:42px;border-radius:12px;background:var(--abg);border:1.5px solid var(--abrd);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.lib-info{flex:1;min-width:0}
+.lib-name{font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.lib-price{font-size:13px;color:var(--accent);font-weight:800;margin-top:2px}
+.lib-acts{display:flex;gap:6px;flex-shrink:0}
+.lib-ef{display:none;gap:7px;flex:1}
+.lib-item.editing .lib-view{display:none}
+.lib-item.editing .lib-ef{display:flex}
+/* Add to library form */
+.lib-add-form{background:var(--card);border:1.5px solid var(--abrd);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:var(--sh)}
+.lib-add-title{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.lib-add-row{display:flex;gap:8px;align-items:flex-end}
+
+/* ── SAVED BILLS ── */
+.bl-list{padding:12px 16px}
+.bc{background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-bottom:14px;overflow:hidden;box-shadow:var(--sh);animation:su .22s ease}
+.bc-top{padding:13px 16px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:10px}
+.bc-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0;box-shadow:0 0 6px var(--abrd)}
+.bc-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;flex:1;color:var(--ink)}
+.bc-date{font-size:11px;color:var(--ink3);margin-top:2px}
+.bc-party{font-size:12px;color:var(--accent);font-weight:700;margin-top:1px}
+.bc-acts{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.bc-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.bc-tbl th{background:var(--bg2);padding:7px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink2);font-weight:800}
+.bc-tbl th:nth-child(n+2){text-align:right}
+.bc-tbl td{padding:9px 10px;border-top:1px solid var(--border);color:var(--ink2)}
+.bc-tbl td:last-child{text-align:right;font-weight:800;color:var(--accent)}
+.bc-tbl .repl td:last-child{color:var(--red)}
+.bc-sec-lbl{padding:6px 10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+.bc-sec-lbl.r{background:var(--rbg);color:var(--red);border-top:1px solid var(--border)}
+.bc-foot{padding:13px 16px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,var(--abg),transparent);border-top:1.5px solid var(--abrd)}
+.bcf-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);font-weight:700}
+.bcf-adv{font-size:12px;color:var(--accent);font-weight:700;opacity:.8}
+.bcf-repl{font-size:12px;color:var(--red);font-weight:700;opacity:.8}
+.bcf-val{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;color:var(--accent)}
+.bcf-val.extra{color:#2e7d52}
+.bcf-val.zero{color:var(--ink3)}
+.status-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.status-badge.paid{background:rgba(46,125,82,.12);color:#2e7d52;border:1.5px solid rgba(46,125,82,.25)}
+.status-badge.due{background:rgba(229,57,53,.1);color:#e53935;border:1.5px solid rgba(229,57,53,.22)}
+.status-badge.pending{background:rgba(249,168,37,.12);color:#f9a825;border:1.5px solid rgba(249,168,37,.28)}
+.cc-extra{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.5px;line-height:1}
+
+/* ── BILLS SEARCH/FILTER BAR ── */
+.bills-filter-bar{padding:10px 12px 0;display:flex;flex-direction:column;gap:8px}
+.bills-search-row{display:flex;gap:8px;align-items:center}
+.filter-chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;-ms-overflow-style:none;scrollbar-width:none}
+.filter-chips::-webkit-scrollbar{display:none}
+.fchip{padding:6px 12px;border-radius:20px;border:1.5px solid var(--border2);background:var(--bg2);font-size:11px;font-weight:800;color:var(--ink2);cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all .15s;-webkit-user-select:none;user-select:none}
+.fchip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.sort-row{display:flex;gap:6px;align-items:center}
+.sort-lbl{font-size:11px;font-weight:800;color:var(--ink3);white-space:nowrap}
+.sort-sel{flex:1;padding:7px 10px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--ink);font-size:12px;font-weight:700;font-family:'Nunito',sans-serif;outline:none;-webkit-appearance:none}
+/* ── PAYMENT RECEIVED MODAL ── */
+.prcv-amt-big{font-family:'Poppins',sans-serif;font-size:36px;font-weight:800;color:var(--accent);text-align:center;padding:10px 0 4px}
+.prcv-to-collect{text-align:center;font-size:12px;color:var(--ink3);font-weight:700;margin-bottom:14px}
+.prcv-result{border-radius:12px;padding:12px 14px;margin-top:12px;text-align:center;display:none}
+.prcv-result.paid{background:rgba(46,125,82,.1);border:1.5px solid rgba(46,125,82,.3)}
+.prcv-result.due{background:rgba(229,57,53,.08);border:1.5px solid rgba(229,57,53,.2)}
+.prcv-result.extra{background:rgba(46,125,82,.1);border:1.5px solid rgba(46,125,82,.3)}
+.prcv-result-lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.prcv-result-val{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;margin-top:2px}
+/* ── PAYMENT LOG in bill card ── */
+.pay-log{margin:0 0 0;background:var(--bg2);border-top:1.5px solid var(--border)}
+.pay-log-row{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:1px solid var(--border);font-size:12px}
+.pay-log-row:last-child{border-bottom:none}
+.pay-log-who{font-weight:700;color:var(--ink)}
+.pay-log-amt{font-family:'Poppins',sans-serif;font-weight:800;font-size:13px;color:#2e7d52}
+.pay-log-date{font-size:10px;color:var(--ink3);margin-top:1px}
+/* ── PAYMENT RECV BUTTON ── */
+.btn-prcv{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:10px;border:1.5px solid rgba(46,125,82,.4);background:rgba(46,125,82,.08);color:#2e7d52;font-size:12px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;transition:all .15s;-webkit-user-select:none;user-select:none}
+.btn-prcv:active{opacity:.75}
+
+/* ── SETTINGS ── */
+.settings-wrap{padding:16px}
+.ss-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--ink3);margin-bottom:10px;padding:0 2px}
+.ss-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--sh);margin-bottom:22px}
+.ss-row{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .14s}
+.ss-row:last-child{border:none}
+.ss-row:active{background:var(--bg2)}
+.sr-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sr-info{flex:1}.sr-t{font-weight:800;font-size:14px;color:var(--ink)}.sr-s{font-size:12px;color:var(--ink3);margin-top:1px}
+.sr-v{font-size:13px;font-weight:800;color:var(--accent)}
+.theme-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;box-shadow:var(--sh);margin-bottom:22px}
+.th-dot{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.th-circle{width:50px;height:50px;border-radius:50%;border:3px solid transparent;transition:all .2s;display:flex;align-items:center;justify-content:center;font-size:20px}
+.th-dot.active .th-circle{border-color:var(--accent);box-shadow:0 0 0 3px var(--abrd)}
+.th-lbl{font-size:10px;font-weight:800;color:var(--ink3);text-align:center}
+.about-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:16px;text-align:center;margin-bottom:22px}
+.about-ico{font-size:30px;margin-bottom:6px}
+.about-nm{font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--ink)}
+.about-v{font-size:12px;color:var(--ink3);margin-top:2px}
+.about-d{font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.5}
+
+/* ── MODAL ── */
+.ov{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s}
+.ov.open{opacity:1;pointer-events:all}
+.sheet{background:var(--card);border-radius:22px 22px 0 0;border:1.5px solid var(--border2);padding:20px 18px 36px;width:100%;max-height:82vh;overflow-y:auto;transform:translateY(20px);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}
+.ov.open .sheet{transform:translateY(0)}
+.sh-knob{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:0 auto 18px}
+.sh-title{font-family:'Poppins',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.sh-hint{font-size:12px;color:var(--ink3);background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:12px}
+.fi{display:flex;align-items:center;gap:12px;padding:12px 13px;background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .14s}
+.fi:active{border-color:var(--accent);background:var(--abg)}
+.fi-ico{width:38px;height:38px;border-radius:10px;background:var(--abg);border:1px solid var(--abrd);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.fi-info{flex:1;min-width:0}
+.fi-name{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.fi-price{font-size:12px;color:var(--accent);font-weight:700;margin-top:1px}
+.fi-arr{color:var(--ink3);font-size:18px}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(40px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:28px;font-size:13px;font-weight:700;z-index:999;white-space:nowrap;box-shadow:var(--sh2);transition:transform .28s cubic-bezier(.34,1.56,.64,1),opacity .28s;display:flex;align-items:center;gap:7px;pointer-events:none;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.s{background:var(--accent);color:#fff}
+.toast.e{background:var(--red);color:#fff}
+.toast.wa{background:#25d366;color:#fff}
+.t-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5)}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:36px 20px}
+.empty-ico{font-size:34px;opacity:.35;margin-bottom:8px}
+.empty-t{font-weight:800;font-size:14px;color:var(--ink2);margin-bottom:3px}
+.empty-s{font-size:12px;color:var(--ink3)}
+
+/* ── BOTTOM NAV ── */
+.bnav-outer{position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--nbg);backdrop-filter:blur(20px);border-top:1.5px solid var(--border);box-shadow:0 -2px 12px rgba(0,0,0,.06);padding-bottom:env(safe-area-inset-bottom,0)}
+.bnav{display:flex;width:100%;max-width:430px;margin:0 auto}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 2px;cursor:pointer;color:var(--ink3);transition:color .18s;-webkit-user-select:none;user-select:none;position:relative;min-width:0}
+.ni.active{color:var(--accent)}
+.ni::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:3px;border-radius:3px 3px 0 0;background:var(--accent);transition:width .22s}
+.ni.active::after{width:20px}
+.ni-ic{font-size:20px;margin-bottom:1px;transition:transform .18s;line-height:1}
+.ni.active .ni-ic{transform:scale(1.1)}
+.ni-l{font-size:9px;font-weight:800;letter-spacing:.1px;white-space:nowrap;text-align:center;width:100%}
+
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body data-theme="warm">
+
+<div id="toast" class="toast"><div class="t-dot"></div><span id="tm"></span></div>
+<div class="app">
+
+<!-- ══════════ HOME ══════════ -->
+<div id="s-home" class="screen active">
+  <div class="topbar">
+    <div class="tb-logo-wrap">
+      <div class="tb-logo-icon">🙏</div>
+      <div>
+        <div class="tb-logo-name">Jai <span>Bhawani</span> Bills</div>
+        <div class="tb-logo-tagline">Smart Billing App</div>
+      </div>
+    </div>
+  </div>
+  <div class="home-hd">
+    <div class="hd-greet">Jai Bhawani 🙏</div>
+    <div class="hd-title"><span>Smart Billing</span><br>Jai Bhawani Industies</div>
+    <div class="hd-sub">Track sales, replacements &amp; collections — easily.</div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-box"><div class="stat-n" id="h-it">0</div><div class="stat-l">Saved Items</div></div>
+    <div class="stat-box"><div class="stat-n" id="h-bl">0</div><div class="stat-l">Total Bills</div></div>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card ft" onclick="goTo('bill');resetBill('in')">
+      <div class="mc-icon a">🏭</div>
+      <div class="mc-info"><div class="mc-t">In-Company Bill</div><div class="mc-s">Internal / within company sales</div></div>
+      <div class="mc-arr">›</div>
+    </div>
+    <div class="menu-card ft" onclick="goTo('bill');resetBill('out')" style="background:linear-gradient(135deg,var(--rbg),var(--bg2));border-color:var(--rbrd)">
+      <div class="mc-icon r">🚚</div>
+      <div class="mc-info"><div class="mc-t">Out-Company Bill</div><div class="mc-s">External / outside company sales</div></div>
+      <div class="mc-arr" style="background:var(--rbg)">›</div>
+    </div>
+    <div class="menu-card" onclick="goTo('library')">
+      <div class="mc-icon g">📦</div>
+      <div class="mc-info"><div class="mc-t">Item Library</div><div class="mc-s">Save &amp; manage item prices</div></div>
+      <div class="mc-arr">›</div>
+    </div>
+    <div class="menu-card" onclick="goTo('bills')">
+      <div class="mc-icon r">🧾</div>
+      <div class="mc-info"><div class="mc-t">Saved Bills</div><div class="mc-s">View all previous bills</div></div>
+      <div class="mc-arr">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ BILL ══════════ -->
+<div id="s-bill" class="screen">
+  <div class="topbar">
+    <div class="tb-back" onclick="goTo('home')">‹</div>
+    <div class="tb-title" id="bill-type-title">New Bill</div>
+    <button class="btn btn-g btn-sm" onclick="openFetch('sale')">⬇ Fetch</button>
+    <button class="btn btn-a btn-sm" onclick="addSale()" style="margin-left:4px">＋ Add</button>
+  </div>
+
+  <!-- PARTY NAME TOGGLE -->
+  <div class="toggle-card" style="margin-top:14px">
+    <div class="toggle-row" onclick="toggleParty()">
+      <div class="tr-icon blue">👤</div>
+      <div class="tr-info">
+        <div class="tr-title">Party / Customer Name</div>
+        <div class="tr-sub" id="party-sub">Optional — tap to add</div>
+      </div>
+      <div class="tog" id="party-tog"></div>
+    </div>
+    <div class="toggle-body" id="party-body">
+      <div style="margin-bottom:10px">
+        <div class="flbl">Customer / Party Name</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="inp" type="text" id="party-name" placeholder="e.g. Sharma Ji, ABC Traders…" autocomplete="off" style="flex:1"/>
+          <button class="btn btn-g btn-sm" onclick="pickPartyContact()" id="party-contact-btn" style="flex-shrink:0;white-space:nowrap;gap:4px"><span>👥</span> Contacts</button>
+        </div>
+      </div>
+      <div>
+        <div class="flbl">Phone Number (Optional)</div>
+        <input class="inp" type="tel" id="party-phone" placeholder="e.g. 9876543210" maxlength="18" onblur="this.value=fmtPhone(this.value)"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEHICLE DETAILS TOGGLE -->
+  <div class="toggle-card">
+    <div class="toggle-row" onclick="toggleVehicle()">
+      <div class="tr-icon" style="background:rgba(33,150,243,.1);border:1.5px solid rgba(33,150,243,.25)">🚗</div>
+      <div class="tr-info">
+        <div class="tr-title">Vehicle Details</div>
+        <div class="tr-sub" id="veh-sub">Optional — tap to add driver &amp; vehicle info</div>
+      </div>
+      <div class="tog" id="veh-tog"></div>
+    </div>
+    <div class="toggle-body" id="veh-body">
+      <!-- Driver Name with Contacts picker -->
+      <div style="margin-bottom:10px">
+        <div class="flbl">Driver Name</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <input class="inp" type="text" id="veh-driver" placeholder="Enter driver name" autocomplete="off" style="flex:1;min-width:0"/>
+          <button class="btn btn-g btn-sm" onclick="openDriverLib()" style="flex-shrink:0;white-space:nowrap;gap:4px">🚗 Saved</button>
+          <button class="btn btn-g btn-sm" onclick="pickContact()" id="contact-btn" style="flex-shrink:0;white-space:nowrap;gap:4px"><span>👥</span></button>
+        </div>
+        <div id="contact-note" style="font-size:11px;color:var(--ink3);margin-top:4px;display:none">
+          📱 Contact selected — phone auto-filled below.
+        </div>
+        <!-- Save driver to library button -->
+        <div style="margin-top:6px">
+          <button class="btn btn-g btn-xs" onclick="saveDriverToLib()" style="font-size:11px;gap:4px">💾 Save this driver to library</button>
+        </div>
+      </div>
+      <!-- Driver Phone -->
+      <div style="margin-bottom:10px">
+        <div class="flbl">Driver Phone Number</div>
+        <input class="inp" type="tel" id="veh-phone" placeholder="e.g. 9876543210" maxlength="18" onblur="this.value=fmtPhone(this.value)"/>
+      </div>
+      <!-- Vehicle Number -->
+      <div>
+        <div class="flbl">Vehicle Number</div>
+        <input class="inp" type="text" id="veh-number" placeholder="e.g. MH12AB1234" autocomplete="off" style="text-transform:uppercase"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITEMS SOLD -->
+  <div class="sec-wrap">
+    <div class="sec-hd">
+      <div class="sec-icon a">📋</div>
+      <div class="sec-lbl">Items Sold</div>
+      <span class="cnt-chip" id="sc-chip">0 items</span>
+    </div>
+  </div>
+  <div class="tbl-card">
+    <div class="tbl-head c5">
+      <span>Name</span><span>₹/pc</span><span>Qty</span><span>Total</span><span></span>
+    </div>
+    <div id="sale-body"></div>
+    <button class="tbl-add a" onclick="addSale()">＋ Add row</button>
+  </div>
+  <div id="s-pill" style="display:none">
+    <div class="pill a">
+      <span class="pill-lbl a">📥 To Collect</span>
+      <span class="pill-val a" id="s-pv">₹0</span>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- REPLACEMENT TOGGLE — like advance -->
+  <div class="toggle-card">
+    <div class="toggle-row" onclick="toggleRepl()">
+      <div class="tr-icon red">🔄</div>
+      <div class="tr-info">
+        <div class="tr-title">Replacements</div>
+        <div class="tr-sub" id="repl-sub">Tap to add returned/replaced items</div>
+      </div>
+      <div class="tog" id="repl-tog"></div>
+    </div>
+    <div class="toggle-body" id="repl-body-wrap">
+      <div style="padding:4px 0 6px;font-size:12px;color:var(--red);font-weight:700;display:flex;align-items:center;gap:5px">
+        🔄 These items will be <strong>deducted</strong> from your collection.
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <button class="btn btn-g btn-xs" onclick="openFetch('repl')">⬇ Fetch</button>
+        <button class="btn btn-r btn-xs" onclick="addRepl()">＋ Add item</button>
+      </div>
+      <div class="tbl-card" style="margin:0">
+        <div class="tbl-head c5">
+          <span>Name</span><span>₹/pc</span><span>Qty</span><span>Total</span><span></span>
+        </div>
+        <div id="repl-body">
+          <div class="empty" style="padding:14px"><div class="empty-ico" style="font-size:20px">🔄</div><div class="empty-s">Tap "+ Add item" above</div></div>
+        </div>
+        <button class="tbl-add r" onclick="addRepl()">＋ Add replacement</button>
+      </div>
+      <div id="r-pill" style="display:none;margin:8px 0 0">
+        <div class="pill r" style="margin:0">
+          <span class="pill-lbl r">📤 To Deduct</span>
+          <span class="pill-val r" id="r-pv">₹0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANCE TOGGLE -->
+  <div class="toggle-card">
+    <div class="toggle-row" onclick="toggleAdv()">
+      <div class="tr-icon orange">💰</div>
+      <div class="tr-info">
+        <div class="tr-title">Advance Payment</div>
+        <div class="tr-sub" id="adv-sub">Tap to enable if advance was paid</div>
+      </div>
+      <div class="tog" id="adv-tog"></div>
+    </div>
+    <div class="toggle-body" id="adv-body">
+      <!-- Amount -->
+      <div style="margin-bottom:10px">
+        <div class="flbl">Advance Amount (₹)</div>
+        <div class="pfx-wrap">
+          <span class="pfx">₹</span>
+          <input class="inp" type="text" id="adv-amt-display" placeholder="0" oninput="onAdvAmt(this)" inputmode="numeric" autocomplete="off" style="padding-left:23px"/>
+        </div>
+        <!-- Preview formatted value -->
+        <div id="adv-fmt-preview" style="font-size:13px;color:var(--accent);font-weight:800;margin-top:5px;display:none"></div>
+        <!-- Hidden actual numeric value used in calculations -->
+        <input type="hidden" id="adv-amt" value=""/>
+      </div>
+      <!-- Payment Mode -->
+      <div style="margin-bottom:10px">
+        <div class="flbl">Payment Mode</div>
+        <div style="display:flex;gap:8px">
+          <button class="pay-mode-btn active" id="pm-cash" onclick="setPayMode('cash')">💵 Cash</button>
+          <button class="pay-mode-btn" id="pm-upi" onclick="setPayMode('upi')">📱 UPI</button>
+        </div>
+      </div>
+      <!-- Received By (for both Cash and UPI) -->
+      <div id="upi-section" style="display:none">
+        <div class="flbl">Received By</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <button class="pay-mode-btn" id="rb-utsav" onclick="setReceiver('Utsav Sir')">👤 Utsav Sir</button>
+          <button class="pay-mode-btn" id="rb-sunil" onclick="setReceiver('Sunil Sir')">👤 Sunil Sir</button>
+          <button class="pay-mode-btn" id="rb-other" onclick="setReceiver('other')">✏️ Other</button>
+        </div>
+        <div id="upi-other-wrap" style="display:none">
+          <div style="display:flex;gap:8px;align-items:center">
+            <input class="inp" type="text" id="upi-other-name" placeholder="Enter receiver name" autocomplete="off" style="font-size:13px;flex:1"/>
+            <button class="btn btn-a" onclick="confirmOtherReceiver()" style="padding:10px 18px;font-size:13px;flex-shrink:0;border-radius:10px">✓ OK</button>
+          </div>
+        </div>
+        <div id="upi-receiver-tag" style="font-size:12px;color:var(--accent);font-weight:700;margin-top:4px;display:none"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL SUMMARY -->
+  <div id="fin-sec" style="display:none">
+    <div class="summary">
+      <div class="sum-row"><span class="sum-lbl">Items Total</span><span class="sum-val" id="f-sale">₹0</span></div>
+      <div class="sum-row" id="f-rr" style="display:none"><span class="sum-lbl" style="color:var(--red)">− Replacements</span><span class="sum-val" style="color:var(--red)" id="f-repl">₹0</span></div>
+      <div class="sum-row" id="f-ar" style="display:none"><span class="sum-lbl" style="color:#f9a825">− Advance Paid</span><span class="sum-val" style="color:#f9a825" id="f-adv">₹0</span></div>
+      <div class="sum-div"></div>
+      <div class="sum-row big"><span class="sum-lbl">Net to Collect</span><span class="sum-val" id="f-net">₹0</span></div>
+    </div>
+
+    <div class="collect-card">
+      <div class="cc-badge" id="bill-type-badge">💰 Final Amount</div>
+      <div class="cc-lbl">Amount to be Collected After All</div>
+      <div id="bill-type-tag" style="font-size:11px;color:rgba(255,255,255,.7);margin-top:3px"></div>
+      <div class="cc-val" id="cc-val">₹0.00</div>
+      <div class="cc-note" id="cc-note"></div>
+    </div>
+
+    <!-- 3 action buttons: Clear | Share | Save -->
+    <div class="bill-cta">
+      <button class="btn btn-g" onclick="if(confirm('Clear this bill?'))resetBill()">🗑 Clear</button>
+      <button class="btn btn-wa" onclick="shareCurrentBillWA()">📲 Share</button>
+      <button class="btn btn-a" onclick="openSave()">💾 Save</button>
+    </div>
+  </div>
+  <div style="height:16px"></div>
+</div>
+
+<!-- ══════════ LIBRARY ══════════ -->
+<div id="s-library" class="screen">
+  <div class="topbar">
+    <div class="tb-back" onclick="goTo('home')">‹</div>
+    <div class="tb-title">Item Library</div>
+    <span class="cnt-chip" id="lib-ct">0</span>
+  </div>
+  <div class="lib-list" id="lib-list">
+    <!-- Search bar -->
+    <div style="margin-bottom:12px">
+      <input class="inp" type="text" id="lib-search" placeholder="🔍 Search saved items…" oninput="filterLib()" autocomplete="off" style="font-size:14px"/>
+    </div>
+    <!-- add new item form always visible -->
+    <div class="lib-add-form">
+      <div class="lib-add-title">➕ Add New Item to Library</div>
+      <div class="lib-add-row">
+        <input class="inp" type="text" id="lib-new-name" placeholder="Item name" style="flex:2;min-width:0;font-size:14px"/>
+        <div class="pfx-wrap" style="flex:1;min-width:0">
+          <span class="pfx">₹</span>
+          <input class="inp" type="number" id="lib-new-price" placeholder="Price" step="0.01" style="font-size:14px;padding-left:22px"/>
+        </div>
+        <button class="btn btn-a btn-ic" onclick="addToLib()" style="flex-shrink:0">＋</button>
+      </div>
+    </div>
+    <div id="lib-items"></div>
+  </div>
+</div>
+
+<!-- ══════════ SAVED BILLS ══════════ -->
+<div id="s-bills" class="screen">
+  <div class="topbar">
+    <div class="tb-back" onclick="goTo('home')">‹</div>
+    <div class="tb-title">Saved Bills</div>
+    <span class="cnt-chip" id="bills-ct">0</span>
+  </div>
+  <!-- Search + Filter Bar -->
+  <div class="bills-filter-bar">
+    <div class="bills-search-row">
+      <input class="inp" type="text" id="bill-search" placeholder="🔍 Search by name, party, item…" oninput="filterBills()" autocomplete="off" style="flex:1;font-size:13px"/>
+    </div>
+    <!-- Status filter chips -->
+    <div class="filter-chips" id="status-chips">
+      <div class="fchip active" data-status="all" onclick="setStatusFilter('all',this)">All</div>
+      <div class="fchip" data-status="pending" onclick="setStatusFilter('pending',this)">🕐 Pending</div>
+      <div class="fchip" data-status="due" onclick="setStatusFilter('due',this)">🔴 Due</div>
+      <div class="fchip" data-status="paid" onclick="setStatusFilter('paid',this)">✅ Paid</div>
+      <div class="fchip" data-status="in" onclick="setStatusFilter('in',this)">🏭 In-Co</div>
+      <div class="fchip" data-status="out" onclick="setStatusFilter('out',this)">🚚 Out-Co</div>
+    </div>
+    <!-- Sort row -->
+    <div class="sort-row">
+      <span class="sort-lbl">Sort by:</span>
+      <select class="sort-sel" id="bill-sort" onchange="filterBills()">
+        <option value="date-desc">📅 Newest first</option>
+        <option value="date-asc">📅 Oldest first</option>
+        <option value="amount-desc">₹ High → Low</option>
+        <option value="amount-asc">₹ Low → High</option>
+        <option value="name-asc">🔤 Name A→Z</option>
+        <option value="items-desc">📦 Most items</option>
+      </select>
+    </div>
+    <div id="bills-result-ct" style="font-size:11px;color:var(--ink3);font-weight:700;padding:2px 2px 0"></div>
+  </div>
+  <div class="bl-list" id="bills-list" style="padding-top:8px"></div>
+</div>
+
+<!-- ══════════ SETTINGS ══════════ -->
+<div id="s-settings" class="screen">
+  <div class="topbar">
+    <div class="tb-back" onclick="goTo('home')">‹</div>
+    <div class="tb-title">Settings</div>
+  </div>
+  <div class="settings-wrap">
+
+    <div class="ss-title">🎨 Choose Theme</div>
+    <div class="theme-grid" id="theme-grid">
+      <div class="th-dot active" data-theme="warm" onclick="setTheme('warm')">
+        <div class="th-circle" style="background:linear-gradient(135deg,#faf8f4,#e8722a)">🌅</div>
+        <div class="th-lbl">Warm</div>
+      </div>
+      <div class="th-dot" data-theme="sky" onclick="setTheme('sky')">
+        <div class="th-circle" style="background:linear-gradient(135deg,#f0f6ff,#1565c0)">🌊</div>
+        <div class="th-lbl">Sky</div>
+      </div>
+      <div class="th-dot" data-theme="forest" onclick="setTheme('forest')">
+        <div class="th-circle" style="background:linear-gradient(135deg,#f2f7f3,#1b7a3e)">🌿</div>
+        <div class="th-lbl">Forest</div>
+      </div>
+      <div class="th-dot" data-theme="dark" onclick="setTheme('dark')">
+        <div class="th-circle" style="background:linear-gradient(135deg,#1e1e28,#7c6ff7)">🌙</div>
+        <div class="th-lbl">Dark</div>
+      </div>
+      <div class="th-dot" data-theme="rose" onclick="setTheme('rose')">
+        <div class="th-circle" style="background:linear-gradient(135deg,#fff5f7,#d81b60)">🌸</div>
+        <div class="th-lbl">Rose</div>
+      </div>
+    </div>
+
+    <div class="ss-title">📋 Data Management</div>
+    <div class="ss-card">
+      <div class="ss-row" onclick="if(confirm('Delete ALL saved bills? Cannot be undone.')){bills=[];sv(BK,bills);toast('All bills cleared','e')}">
+        <div class="sr-ico" style="background:var(--rbg);border:1px solid var(--rbrd)">🗑</div>
+        <div class="sr-info"><div class="sr-t">Clear All Bills</div><div class="sr-s">Permanently delete saved bills</div></div>
+        <div style="color:var(--red);font-size:13px;font-weight:800">Clear</div>
+      </div>
+      <div class="ss-row" onclick="if(confirm('Delete entire item library?')){lib=[];sv(LK,lib);toast('Library cleared','e');renderLib()}">
+        <div class="sr-ico" style="background:var(--rbg);border:1px solid var(--rbrd)">📦</div>
+        <div class="sr-info"><div class="sr-t">Clear Library</div><div class="sr-s">Remove all saved items</div></div>
+        <div style="color:var(--red);font-size:13px;font-weight:800">Clear</div>
+      </div>
+    </div>
+
+    <div class="ss-title">ℹ️ About</div>
+    <div class="about-card">
+      <div class="about-ico">🙏</div>
+      <div class="about-nm">Jai Bhawani Bills</div>
+      <div class="about-v">Version 3.0 · Made for India</div>
+      <div class="about-d">Smart replacement billing app — track items sold, replacements returned, advance payments, and final collection amounts.</div>
+      <div style="margin-top:12px;font-size:11px;color:var(--ink3);font-weight:600">Made with ❤️ by <span style="color:var(--accent);font-weight:800">Dhanuraj Singh</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<!-- BOTTOM NAV -->
+<div class="bnav-outer">
+<div class="bnav">
+  <div class="ni active" id="nav-home" onclick="goTo('home')"><div class="ni-ic">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" id="nav-bill" onclick="openBillPicker()"><div class="ni-ic">➕</div><div class="ni-l">Bill</div></div>
+  <div class="ni" id="nav-library" onclick="goTo('library')"><div class="ni-ic">📦</div><div class="ni-l">Library</div></div>
+  <div class="ni" id="nav-bills" onclick="goTo('bills')"><div class="ni-ic">🧾</div><div class="ni-l">Bills</div></div>
+  <div class="ni" id="nav-settings" onclick="goTo('settings')"><div class="ni-ic">⚙️</div><div class="ni-l">Settings</div></div>
+</div>
+</div>
+
+<!-- BILL TYPE PICKER -->
+<div class="ov" id="m-billtype">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">📋 Choose Bill Type</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div onclick="chooseBillType('in')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--abg);border:1.5px solid var(--abrd);border-radius:14px;cursor:pointer;transition:all .15s" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:48px;height:48px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🏭</div>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:var(--ink)">In-Company Bill</div>
+          <div style="font-size:12px;color:var(--ink3);margin-top:2px">Internal / within company sales</div>
+        </div>
+        <div style="color:var(--accent);font-size:20px;font-weight:700">›</div>
+      </div>
+      <div onclick="chooseBillType('out')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--rbg);border:1.5px solid var(--rbrd);border-radius:14px;cursor:pointer;transition:all .15s" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:48px;height:48px;border-radius:13px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🚚</div>
+        <div style="flex:1">
+          <div style="font-weight:800;font-size:15px;color:var(--ink)">Out-Company Bill</div>
+          <div style="font-size:12px;color:var(--ink3);margin-top:2px">External / outside company sales</div>
+        </div>
+        <div style="color:var(--red);font-size:20px;font-weight:700">›</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="ov" id="m-fetch">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">📦 Fetch from Library</div>
+    <div class="sh-hint" id="fhint"></div>
+    <!-- Search box -->
+    <input class="inp" type="text" id="fetch-search" placeholder="🔍 Search items…" oninput="filterFetch()" autocomplete="off" style="margin-bottom:10px;font-size:14px"/>
+    <div id="flist"></div>
+    <!-- Inline Add New -->
+    <div style="margin-top:14px;border-top:1.5px dashed var(--border2);padding-top:14px">
+      <div style="font-size:12px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">➕ Not in list? Add new item</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input class="inp" type="text" id="fn-name" placeholder="Item name" style="flex:2;min-width:0;font-size:13px;padding:9px 10px" autocomplete="off"/>
+        <div class="pfx-wrap" style="flex:1;min-width:0">
+          <span class="pfx">₹</span>
+          <input class="inp" type="number" id="fn-price" placeholder="Price" step="0.01" style="font-size:13px;padding:9px 10px 9px 22px"/>
+        </div>
+        <button class="btn btn-a btn-ic btn-xs" onclick="addAndFetch()" style="flex-shrink:0;font-size:16px;width:36px;height:36px">＋</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DRIVER LIBRARY MODAL -->
+<div class="ov" id="m-driverlib">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">🚗 Saved Drivers</div>
+    <input class="inp" type="text" id="dl-search" placeholder="🔍 Search drivers…" oninput="filterDriverLib()" autocomplete="off" style="margin-bottom:10px;font-size:14px"/>
+    <div id="dl-list"></div>
+    <div style="margin-top:14px;border-top:1.5px dashed var(--border2);padding-top:14px">
+      <div style="font-size:12px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">➕ Add new driver</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <input class="inp" type="text" id="dn-name" placeholder="Driver name" style="font-size:13px;padding:9px 10px" autocomplete="off"/>
+        <div style="display:flex;gap:8px">
+          <input class="inp" type="tel" id="dn-phone" placeholder="Phone number" style="flex:1;font-size:13px;padding:9px 10px" maxlength="18" onblur="this.value=fmtPhone(this.value)"/>
+          <input class="inp" type="text" id="dn-vehicle" placeholder="Vehicle no." style="flex:1;font-size:13px;padding:9px 10px;text-transform:uppercase" autocomplete="off"/>
+        </div>
+        <button class="btn btn-a" onclick="addDriverToLib()" style="width:100%;justify-content:center">💾 Save Driver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT RECEIVED MODAL -->
+<div class="ov" id="m-prcv">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">💰 Payment Received</div>
+    <div class="sh-hint" id="prcv-bill-name" style="font-weight:800;color:var(--ink)"></div>
+    <!-- To collect amount display -->
+    <div class="prcv-to-collect">Net to collect: <span id="prcv-to-collect-val" style="color:var(--accent);font-weight:800"></span></div>
+    <!-- Amount input -->
+    <div style="margin-bottom:12px">
+      <div class="flbl">Amount Received (₹)</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="pfx-wrap" style="flex:1">
+          <span class="pfx">₹</span>
+          <input class="inp" type="text" id="prcv-amt" placeholder="0" oninput="onPrcvAmt(this)" inputmode="numeric" style="padding-left:23px;font-size:15px;font-weight:800"/>
+        </div>
+      </div>
+      <div id="prcv-fmt" style="font-size:12px;color:var(--accent);font-weight:800;margin-top:4px;display:none"></div>
+    </div>
+    <!-- Result preview -->
+    <div class="prcv-result" id="prcv-result">
+      <div class="prcv-result-lbl" id="prcv-result-lbl"></div>
+      <div class="prcv-result-val" id="prcv-result-val"></div>
+    </div>
+    <!-- Receiver name + phone -->
+    <div style="margin-top:14px;border-top:1.5px dashed var(--border2);padding-top:12px">
+      <div class="flbl">Received From (Name)</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <input class="inp" type="text" id="prcv-who" placeholder="Who paid?" style="flex:1;font-size:13px" autocomplete="off"/>
+        <button class="btn btn-g btn-sm" onclick="prcvPickContact()" style="flex-shrink:0">👥</button>
+        <button class="btn btn-g btn-sm" onclick="prcvPickFromParty()" style="flex-shrink:0" title="Use party from bill">👤</button>
+      </div>
+      <div class="flbl">Phone (optional)</div>
+      <input class="inp" type="tel" id="prcv-phone" placeholder="Phone number" style="font-size:13px" maxlength="18" onblur="this.value=fmtPhone(this.value)"/>
+    </div>
+    <!-- Confirm button -->
+    <button class="btn btn-a" onclick="confirmPayment()" style="width:100%;justify-content:center;margin-top:14px;padding:14px;font-size:15px">✓ Confirm Payment</button>
+  </div>
+</div>
+
+<div class="ov" id="m-save">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">💾 Save Bill</div>
+    <div style="margin-bottom:14px">
+      <div class="flbl">Bill / Customer Name</div>
+      <input class="inp" type="text" id="sname" placeholder="e.g. Sharma Ji – Motor Repair" maxlength="60"/>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-g" style="flex:1" onclick="closeM('m-save')">Cancel</button>
+      <button class="btn btn-a" style="flex:2" onclick="doSave()">💾 Save</button>
+    </div>
+  </div>
+</div>
+
+<script>// ── SAFE DOM HELPERS ──
+function $t(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function $s(id,p,v){const e=document.getElementById(id);if(e)e.style[p]=v;}
+function $cl(id,v){const e=document.getElementById(id);if(e)e.className=v;}
+function $in(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v;}
+
+
+// ── DATA ──
+const LK='jbb_lib', BK='jbb_bills', TK='jbb_theme', DLK='jbb_drivers';
+let lib=ld(LK), bills=ld(BK), driverLib=ld(DLK);
+let sRows=[], rRows=[];
+let advOn=false, replOn=false, partyOn=false, vehicleOn=false, fTarget='sale', rid=0;
+
+function ld(k){try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return[]}}
+function sv(k,d){localStorage.setItem(k,JSON.stringify(d))}
+
+// ── THEME ──
+function setTheme(t){
+  document.body.setAttribute('data-theme',t);
+  localStorage.setItem(TK,t);
+  document.querySelectorAll('.th-dot').forEach(d=>d.classList.toggle('active',d.dataset.theme===t));
+  toast('Theme changed ✓');
+}
+(function(){
+  const t=localStorage.getItem(TK)||'warm';
+  document.body.setAttribute('data-theme',t);
+  document.querySelectorAll('.th-dot').forEach(d=>d.classList.toggle('active',d.dataset.theme===t));
+})();
+
+// ── NAV ──
+function goTo(s){
+  document.querySelectorAll('.screen').forEach(e=>e.classList.remove('active'));
+  document.getElementById('s-'+s).classList.add('active');
+  document.querySelectorAll('.ni').forEach(e=>e.classList.remove('active'));
+  document.getElementById('nav-'+s).classList.add('active');
+  if(s==='home')refreshHome();
+  if(s==='library')renderLib();
+  if(s==='bills')renderBills();
+  window.scrollTo(0,0);
+}
+
+// ── TOAST ──
+let tt;
+function toast(msg,t='s'){
+  const el=document.getElementById('toast');
+  $t('tm',msg);
+  el.className=`toast ${t} show`;
+  clearTimeout(tt);tt=setTimeout(()=>{el.className=`toast ${t}`},2600);
+}
+
+// ── HOME ──
+function refreshHome(){
+  $t('h-it',lib.length);
+  $t('h-bl',bills.length);
+}
+
+// ── BILL TYPE ──
+let billType='in';
+
+function setBillType(type){
+  billType=type;
+  const isIn=(type==='in');
+  $t('bill-type-title',isIn?'🏭 In-Company Bill':'🚚 Out-Company Bill');
+  const badge=document.getElementById('bill-type-badge');
+  badge.textContent=isIn?'🏭 In-Company':'🚚 Out-Company';
+  $t('bill-type-tag',isIn?'Internal Sales':'External Sales');
+}
+
+// ── QTY VALIDATION ──
+function validateQty(){
+  // Check all sale rows have qty > 0
+  for(const r of sRows){
+    const qEl=document.getElementById('q-'+r.id);
+    const pEl=document.getElementById('p-'+r.id);
+    const nEl=document.getElementById('n-'+r.id);
+    const p=parseFloat(pEl?.value)||0;
+    const q=parseFloat(qEl?.value)||0;
+    // only validate rows that have a price entered (i.e. user intends to use them)
+    if(p>0 && q<=0){
+      const name=(nEl?.value||'').trim()||'an item';
+      toast('⚠️ Please enter quantity for "'+name+'" before continuing.','e');
+      qEl?.focus();
+      return false;
+    }
+  }
+  // If replacements are on, validate those too
+  if(replOn){
+    for(const r of rRows){
+      const qEl=document.getElementById('q-'+r.id);
+      const pEl=document.getElementById('p-'+r.id);
+      const nEl=document.getElementById('n-'+r.id);
+      const p=parseFloat(pEl?.value)||0;
+      const q=parseFloat(qEl?.value)||0;
+      if(p>0 && q<=0){
+        const name=(nEl?.value||'').trim()||'a replacement item';
+        toast('⚠️ Please enter quantity for "'+name+'" before continuing.','e');
+        qEl?.focus();
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+// ── RESET BILL ──
+function resetBill(type){
+  billType=type||'in';
+  setBillType(billType);
+  sRows=[];rRows=[];advOn=false;replOn=false;partyOn=false;rid=0;
+  document.getElementById('sale-body').innerHTML='';
+  document.getElementById('repl-body').innerHTML='<div class="empty" style="padding:14px"><div class="empty-ico" style="font-size:20px">🔄</div><div class="empty-s">Tap "+ Add item" above</div></div>';
+  document.getElementById('adv-tog').className='tog';
+  document.getElementById('adv-body').className='toggle-body';
+  $t('adv-sub','Tap to enable if advance was paid');
+  document.getElementById('adv-sub').className='tr-sub';
+  document.getElementById('adv-amt').value='';
+  document.getElementById('adv-amt-display').value='';
+  document.getElementById('adv-fmt-preview').style.display='none';
+  payMode='cash';upiReceiver='';
+  document.getElementById('pm-cash').classList.remove('active');
+  document.getElementById('pm-upi').classList.remove('active');
+  document.getElementById('upi-section').style.display='none';
+  document.getElementById('rb-utsav').classList.remove('active');
+  document.getElementById('rb-sunil').classList.remove('active');
+  document.getElementById('rb-other').classList.remove('active');
+  document.getElementById('upi-other-name').value='';
+  document.getElementById('upi-other-wrap').style.display='none';
+  document.getElementById('repl-tog').className='tog';
+  document.getElementById('repl-body-wrap').className='toggle-body';
+  $t('repl-sub','Tap to add returned/replaced items');
+  document.getElementById('repl-sub').className='tr-sub';
+  document.getElementById('party-tog').className='tog';
+  document.getElementById('party-body').className='toggle-body';
+  $t('party-sub','Optional — tap to add');
+  document.getElementById('party-sub').className='tr-sub';
+  document.getElementById('party-name').value='';
+  document.getElementById('party-phone').value='';
+  document.getElementById('veh-tog').className='tog';
+  document.getElementById('veh-body').className='toggle-body';
+  $t('veh-sub','Optional — tap to add driver & vehicle info');
+  document.getElementById('veh-sub').className='tr-sub';
+  document.getElementById('veh-driver').value='';
+  document.getElementById('veh-phone').value='';
+  document.getElementById('veh-number').value='';
+  document.getElementById('contact-note').style.display='none';
+  vehicleOn=false;
+  $s('s-pill','display','none');
+  $s('r-pill','display','none');
+  $s('fin-sec','display','none');
+  $t('sc-chip','0 items');
+  addSale();
+}
+
+// ── PARTY TOGGLE ──
+function toggleParty(){
+  partyOn=!partyOn;
+  document.getElementById('party-tog').className='tog'+(partyOn?' on':'');
+  document.getElementById('party-body').className='toggle-body'+(partyOn?' open':'');
+  const sub=document.getElementById('party-sub');
+  sub.textContent=partyOn?'Party name will appear on bill':'Optional — tap to add';
+  sub.className='tr-sub'+(partyOn?' on':'');
+  if(partyOn)setTimeout(()=>document.getElementById('party-name')?.focus(),160);
+}
+
+// ── VEHICLE TOGGLE ──
+function toggleVehicle(){
+  vehicleOn=!vehicleOn;
+  document.getElementById('veh-tog').className='tog'+(vehicleOn?' on':'');
+  document.getElementById('veh-body').className='toggle-body'+(vehicleOn?' open':'');
+  const sub=document.getElementById('veh-sub');
+  sub.textContent=vehicleOn?'Driver & vehicle info will appear on bill':'Optional — tap to add driver & vehicle info';
+  sub.className='tr-sub'+(vehicleOn?' on':'');
+  if(vehicleOn)setTimeout(()=>document.getElementById('veh-driver')?.focus(),160);
+}
+
+// ── CONTACTS PICKER ──
+async function pickContact(){
+  const btn=document.getElementById('contact-btn');
+  // Check if Contacts API is supported
+  if(!('contacts' in navigator && 'ContactsManager' in window)){
+    // Fallback: just focus the driver name field
+    toast('Contacts not supported on this browser — type manually','e');
+    document.getElementById('veh-driver').focus();
+    return;
+  }
+  try{
+    btn.textContent='⏳ Opening...';
+    btn.disabled=true;
+    const props=['name','tel'];
+    const opts={multiple:false};
+    const contacts=await navigator.contacts.select(props,opts);
+    if(contacts&&contacts.length>0){
+      const contact=contacts[0];
+      const name=(contact.name&&contact.name[0])||'';
+      const phone=(contact.tel&&contact.tel[0])||'';
+      if(name){
+        document.getElementById('veh-driver').value=name;
+      }
+      if(phone){
+        // Clean phone: remove spaces, dashes, brackets, country code if starts with +91
+        let cleaned=phone.replace(/[\s\-\(\)]/g,'');
+        if(cleaned.startsWith('+91'))cleaned=cleaned.slice(3);
+        document.getElementById('veh-phone').value=fmtPhone(cleaned);
+        document.getElementById('contact-note').style.display='block';
+      }
+      toast('Contact "'+name+'" selected ✓');
+    }
+  }catch(e){
+    if(e.name!=='AbortError'){
+      toast('Could not access contacts','e');
+    }
+  }finally{
+    btn.innerHTML='<span>👥</span> Contacts';
+    btn.disabled=false;
+  }
+}
+
+// ── PARTY CONTACT PICKER ──
+async function pickPartyContact(){
+  const btn=document.getElementById('party-contact-btn');
+  if(!('contacts' in navigator && 'ContactsManager' in window)){
+    toast('Contacts not supported — type manually','e');
+    document.getElementById('party-name').focus();
+    return;
+  }
+  try{
+    btn.innerHTML='⏳';btn.disabled=true;
+    const contacts=await navigator.contacts.select(['name','tel'],{multiple:false});
+    if(contacts&&contacts.length>0){
+      const ct=contacts[0];
+      const name=(ct.name&&ct.name[0])||'';
+      const phone=(ct.tel&&ct.tel[0])||'';
+      if(name)document.getElementById('party-name').value=name;
+      if(phone){
+        let cleaned=phone.replace(/[\s\-\(\)]/g,'');
+        if(cleaned.startsWith('+91'))cleaned=cleaned.slice(3);
+        document.getElementById('party-phone').value=fmtPhone(cleaned);
+      }
+      toast('Contact "'+name+'" selected ✓');
+    }
+  }catch(e){
+    if(e.name!=='AbortError')toast('Could not access contacts','e');
+  }finally{
+    btn.innerHTML='<span>👥</span> Contacts';btn.disabled=false;
+  }
+}
+
+// ── REPLACEMENT TOGGLE ──
+function toggleRepl(){
+  replOn=!replOn;
+  document.getElementById('repl-tog').className='tog'+(replOn?' on':'');
+  document.getElementById('repl-body-wrap').className='toggle-body'+(replOn?' open':'');
+  const sub=document.getElementById('repl-sub');
+  sub.textContent=replOn?'Replacement items will be deducted':'Tap to add returned/replaced items';
+  sub.className='tr-sub'+(replOn?' on':'');
+  recalc();
+}
+
+// ── ADVANCE TOGGLE ──
+function toggleAdv(){
+  advOn=!advOn;
+  document.getElementById('adv-tog').className='tog'+(advOn?' on':'');
+  document.getElementById('adv-body').className='toggle-body'+(advOn?' open':'');
+  const sub=document.getElementById('adv-sub');
+  sub.textContent=advOn?'Advance will be deducted from total':'Tap to enable if advance was paid';
+  sub.className='tr-sub'+(advOn?' on':'');
+  if(advOn)setTimeout(()=>document.getElementById('adv-amt')?.focus(),160);
+  else {
+    document.getElementById('adv-amt').value='';
+    document.getElementById('adv-amt-display').value='';
+    document.getElementById('adv-fmt-preview').style.display='none';
+  }
+  recalc();
+}
+
+// ── ADVANCE AMOUNT REAL-TIME FORMAT ──
+function onAdvAmt(el){
+  // Strip non-digits and decimal point
+  let raw=el.value.replace(/[^0-9.]/g,'');
+  // Allow only one decimal point
+  const parts=raw.split('.');
+  if(parts.length>2)raw=parts[0]+'.'+parts.slice(1).join('');
+  el.value=raw;
+  const num=parseFloat(raw)||0;
+  // Update hidden input for calculations
+  document.getElementById('adv-amt').value=num||'';
+  // Show live formatted preview
+  const prev=document.getElementById('adv-fmt-preview');
+  if(num>0){
+    prev.textContent='= '+INR(num);
+    prev.style.display='block';
+  } else {
+    prev.style.display='none';
+  }
+  recalc();
+}
+
+// ── PAYMENT MODE ──
+let payMode='cash', upiReceiver='';
+function setPayMode(mode){
+  payMode=mode;
+  document.getElementById('pm-cash').classList.toggle('active', mode==='cash');
+  document.getElementById('pm-upi').classList.toggle('active', mode==='upi');
+  // Show "Received By" once user picks a mode
+  document.getElementById('upi-section').style.display='block';
+}
+function setReceiver(name){
+  const btns=['rb-utsav','rb-sunil','rb-other'];
+  btns.forEach(id=>document.getElementById(id).classList.remove('active'));
+  const otherWrap=document.getElementById('upi-other-wrap');
+  const tag=document.getElementById('upi-receiver-tag');
+  if(name==='other'){
+    document.getElementById('rb-other').classList.add('active');
+    otherWrap.style.display='block';
+    upiReceiver='';tag.style.display='none';
+    setTimeout(()=>document.getElementById('upi-other-name')?.focus(),80);
+  } else {
+    if(name==='Utsav Sir')document.getElementById('rb-utsav').classList.add('active');
+    else document.getElementById('rb-sunil').classList.add('active');
+    otherWrap.style.display='none';
+    upiReceiver=name;
+    tag.textContent='✓ Received by: '+name;
+    tag.style.display='block';
+  }
+}
+function confirmOtherReceiver(){
+  const name=(document.getElementById('upi-other-name')?.value||'').trim();
+  if(!name){toast('Enter a name','e');document.getElementById('upi-other-name').focus();return;}
+  upiReceiver=name;
+  const tag=document.getElementById('upi-receiver-tag');
+  tag.textContent='✓ Received by: '+name;
+  tag.style.display='block';
+  document.getElementById('upi-other-wrap').style.display='none';
+  document.getElementById('rb-other').classList.add('active');
+  toast('"'+name+'" set as receiver');
+}
+function getUpiReceiver(){
+  const otherWrap=document.getElementById('upi-other-wrap');
+  if(otherWrap.style.display!=='none'){
+    return (document.getElementById('upi-other-name')?.value||'').trim();
+  }
+  return upiReceiver;
+}
+
+// ── ROWS ──
+function mkRow(id,cls){
+  const d=document.createElement('div');
+  d.className='rw';d.id='rw-'+id;
+  d.innerHTML=`<div class="irow c5">
+    <input type="text" placeholder="Item name" id="n-${id}" oninput="recalc()" autocomplete="off"/>
+    <input type="number" placeholder="0" id="p-${id}" oninput="recalc()" step="0.01"/>
+    <input type="number" placeholder="Qty" id="q-${id}" oninput="recalc()" step="1" min="1"/>
+    <div class="row-amt ${cls}" id="t-${id}">₹0</div>
+    <div class="row-del-cell"><button class="del-btn" onclick="delRow('${id}')">✕</button></div>
+  </div>`;
+  return d;
+}
+function addSale(pre){
+  const id='s'+(++rid);sRows.push({id});
+  document.getElementById('sale-body').appendChild(mkRow(id,'a'));
+  if(pre){document.getElementById('n-'+id).value=pre.name;document.getElementById('p-'+id).value=pre.price}
+  else setTimeout(()=>document.getElementById('n-'+id)?.focus(),60);
+  recalc();
+}
+function addRepl(pre){
+  // Auto-open replacement toggle if closed
+  if(!replOn) toggleRepl();
+  const id='r'+(++rid);rRows.push({id});
+  const container=document.getElementById('repl-body');
+  const emp=container.querySelector('.empty');if(emp)emp.remove();
+  container.appendChild(mkRow(id,'r'));
+  if(pre){
+    document.getElementById('n-'+id).value=pre.name;
+    document.getElementById('p-'+id).value=pre.price;
+  } else {
+    setTimeout(()=>document.getElementById('n-'+id)?.focus(),120);
+  }
+  recalc();
+}
+function delRow(id){
+  sRows=sRows.filter(r=>r.id!==id);rRows=rRows.filter(r=>r.id!==id);
+  const el=document.getElementById('rw-'+id);
+  if(el){el.style.cssText='opacity:0;transform:translateX(6px);transition:all .18s';setTimeout(()=>el.remove(),190)}
+  if(rRows.length===0)document.getElementById('repl-body').innerHTML='<div class="empty" style="padding:14px"><div class="empty-ico" style="font-size:20px">🔄</div><div class="empty-s">Tap "+ Add item" above</div></div>';
+  setTimeout(recalc,200);
+}
+
+// ── RECALC ──
+const INR=n=>{
+  const formatted=new Intl.NumberFormat('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n||0);
+  return '₹'+formatted;
+};
+function fmtPhone(p){
+  if(!p)return'';
+  // Remove all non-digits
+  let d=p.replace(/\D/g,'');
+  // Handle +91 country code
+  let prefix='';
+  if(p.startsWith('+91')&&d.length===12){prefix='+91 ';d=d.slice(2);}
+  else if(p.startsWith('91')&&d.length===12){prefix='+91 ';d=d.slice(2);}
+  // Format 10 digits as XXX-XXX-XXXX
+  if(d.length===10)return prefix+d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6);
+  return p; // return as-is if not standard
+}
+function rowT(id){
+  const p=parseFloat(document.getElementById('p-'+id)?.value)||0;
+  const q=parseFloat(document.getElementById('q-'+id)?.value)||0;
+  const t=p*q;
+  const el=document.getElementById('t-'+id);
+  if(el)el.textContent=t>0?INR(t):'₹0';
+  return t;
+}
+function recalc(){
+  if(!document.getElementById('fin-sec'))return; // bill screen not in DOM
+  const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
+  const rT=replOn?rRows.reduce((s,r)=>s+rowT(r.id),0):0;
+  const adv=advOn?(parseFloat(document.getElementById('adv-amt').value)||0):0;
+  const rawNet=sT-rT-adv; // can be negative (overpayment)
+  const net=Math.max(0,rawNet);
+  const extra=rawNet<0?Math.abs(rawNet):0;
+  $t('sc-chip',sRows.length+' item'+(sRows.length!==1?'s':''));
+  const sp=document.getElementById('s-pill');
+  if(sT>0){sp.style.display='block';$t('s-pv',INR(sT))}else sp.style.display='none';
+  const rp=document.getElementById('r-pill');
+  if(rT>0&&replOn){rp.style.display='block';$t('r-pv',INR(rT))}else rp.style.display='none';
+  const fs=document.getElementById('fin-sec');
+  if(sT>0){
+    fs.style.display='block';
+    $t('f-sale',INR(sT));
+    const frr=document.getElementById('f-rr'),far=document.getElementById('f-ar');
+    if(rT>0&&replOn){frr.style.display='flex';$t('f-repl',INR(rT))}else frr.style.display='none';
+    if(adv>0){far.style.display='flex';$t('f-adv',INR(adv))}else far.style.display='none';
+    $t('f-net',extra>0?'Extra '+INR(extra):INR(net));
+    if(extra>0){
+      // Overpaid — show "Extra ₹X" in green
+      $t('cc-val','Extra '+INR(extra));
+      $cl('cc-val','cc-extra');
+      $t('cc-lbl','Overpaid — Change to Return');
+      $t('cc-note','✓ Bill fully settled · Extra paid: '+INR(extra));
+    } else if(net===0&&adv>0){
+      // Exactly paid
+      $t('cc-val',INR(0));
+      $cl('cc-val','cc-val');
+      $t('cc-lbl','Amount to be Collected After All');
+      $t('cc-note','✅ Fully Paid!');
+    } else {
+      $t('cc-val',INR(net));
+      $cl('cc-val','cc-val');
+      $t('cc-lbl','Amount to be Collected After All');
+      const notes=[];if(rT>0&&replOn)notes.push('replacements deducted');if(adv>0)notes.push('advance deducted');
+      $t('cc-note',notes.length?'✓ '+notes.join(' · '):'');
+    }
+  }else fs.style.display='none';
+}
+
+// ── WHATSAPP SHARE (current bill — no save needed) ──
+function shareCurrentBillWA(){
+  if(!validateQty())return;
+  const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
+  if(sT===0){toast('Add items first','e');return}
+  const rT=replOn?rRows.reduce((s,r)=>s+rowT(r.id),0):0;
+  const adv=advOn?(parseFloat(document.getElementById('adv-amt').value)||0):0;
+  const rawNet=sT-rT-adv;
+  const net=Math.max(0,rawNet);
+  const party=(document.getElementById('party-name').value||'').trim();
+  let msg='🙏 *Jai Bhawani Bills*\n';
+  const partyPhone=(document.getElementById('party-phone').value||'').trim();
+  if(party)msg+=`👤 Party: *${party}*${partyPhone?' | 📞'+partyPhone:''}\n`;
+  if(vehicleOn){
+    const vd=document.getElementById('veh-driver').value.trim();
+    const vp=document.getElementById('veh-phone').value.trim();
+    const vn=document.getElementById('veh-number').value.trim().toUpperCase();
+    if(vd||vn)msg+=`🚗 Driver: ${vd||'—'}${vp?' ('+vp+')':''}${vn?' | Vehicle: '+vn:''}\n`;
+  }
+  msg+=`📅 ${new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}\n\n`;
+  msg+='📋 *Items Sold*\n';
+  sRows.forEach(r=>{
+    const n=document.getElementById('n-'+r.id)?.value||'—';
+    const p=parseFloat(document.getElementById('p-'+r.id)?.value)||0;
+    const q=parseFloat(document.getElementById('q-'+r.id)?.value)||0;
+    if(p*q>0)msg+=`• ${n} × ${q} @ ₹${p} = *${INR(p*q)}*\n`;
+  });
+  msg+=`\n💰 *To Collect: ${INR(sT)}*\n`;
+  if(replOn&&rRows.length>0&&rT>0){
+    msg+='\n🔄 *Replacements*\n';
+    rRows.forEach(r=>{
+      const n=document.getElementById('n-'+r.id)?.value||'—';
+      const p=parseFloat(document.getElementById('p-'+r.id)?.value)||0;
+      const q=parseFloat(document.getElementById('q-'+r.id)?.value)||0;
+      if(p*q>0)msg+=`• ${n} × ${q} @ ₹${p} = ${INR(p*q)}\n`;
+    });
+    msg+=`🔻 Deducted: ${INR(rT)}\n`;
+  }
+  if(adv>0){
+    const rcvr=getUpiReceiver();
+    const modeLabel=payMode==='upi'?'📱 UPI':'💵 Cash';
+    msg+=`💳 Advance: ${INR(adv)} via ${modeLabel}${rcvr?' — Received by '+rcvr:''}\n`;
+  }
+  const extra=rawNet<0?Math.abs(rawNet):0;
+  if(extra>0){msg+=`\n🟢 *Overpaid! Extra to Return: ${INR(extra)}*\n\n_via Jai Bhawani Bills_`;}
+  else{msg+=`\n✅ *Final Amount to Collect: ${INR(net)}*\n\n_via Jai Bhawani Bills_`;}
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  toast('Opening WhatsApp...','wa');
+}
+
+// ── WHATSAPP SHARE (saved bill) ──
+function shareBillWA(id){
+  const b=bills.find(x=>x.id===id);if(!b)return;
+  let msg='🙏 *Jai Bhawani Bills*\n';
+  msg+=`🧾 *${b.name}*\n`;
+  if(b.party)msg+=`👤 Party: *${b.party}*${b.partyPhone?' | 📞'+b.partyPhone:''}\n`;
+  if(b.vehicle&&(b.vehicle.driver||b.vehicle.number)){msg+=`🚗 Driver: ${b.vehicle.driver||'—'}${b.vehicle.phone?' ('+b.vehicle.phone+')':''}${b.vehicle.number?' | Vehicle: '+b.vehicle.number:''}\n`;}
+  msg+=`📅 ${b.date}\n\n`;
+  msg+='📋 *Items Sold*\n';
+  b.saleItems.forEach(i=>{if(i.total>0)msg+=`• ${i.name} × ${i.qty} @ ₹${i.price} = *${INR(i.total)}*\n`});
+  msg+=`\n💰 *To Collect: ${INR(b.sT)}*\n`;
+  if(b.replItems?.length&&b.rT>0){
+    msg+='\n🔄 *Replacements*\n';
+    b.replItems.forEach(i=>{if(i.total>0)msg+=`• ${i.name} × ${i.qty} @ ₹${i.price} = ${INR(i.total)}\n`});
+    msg+=`🔻 Deducted: ${INR(b.rT)}\n`;
+  }
+  if(b.adv>0){
+    const modeLabel=b.payMode==='upi'?'📱 UPI':'💵 Cash';
+    msg+=`💳 Advance: ${INR(b.adv)} via ${modeLabel}${b.upiReceivedBy?' — Received by '+b.upiReceivedBy:''}\n`;
+  }
+  if(b.extra>0){msg+=`\n🟢 *Overpaid! Extra to Return: ${INR(b.extra)}*\n\n_via Jai Bhawani Bills_`;}
+  else{msg+=`\n✅ *Final Amount to Collect: ${INR(b.net)}*\n\n_via Jai Bhawani Bills_`;}
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  toast('Opening WhatsApp...','wa');
+}
+
+// ── FETCH ──
+let fTarget2='sale';
+function openFetch(target){
+  fTarget2=target||'sale';
+  // Auto-open the replacement toggle if it's not already open
+  if(fTarget2==='repl'&&!replOn){
+    toggleRepl();
+  }
+  $t('fhint',fTarget2==='sale'?'⬇ Adding to → Sale Items':'⬇ Adding to → Replacements');
+  // Clear search and reset
+  const searchEl=document.getElementById('fetch-search');
+  if(searchEl)searchEl.value='';
+  document.getElementById('fn-name').value='';
+  document.getElementById('fn-price').value='';
+  lib=ld(LK);
+  _fetchCache=[...lib];
+  renderFetchList(_fetchCache);
+  openM('m-fetch');
+}
+function doFetch(lid){
+  const item=lib.find(x=>x.id===lid);if(!item)return;
+  if(fTarget2==='sale'){
+    // Remove all empty rows (no name AND no price) before adding fetched item
+    const emptyIds=sRows.filter(r=>{
+      const n=(document.getElementById('n-'+r.id)?.value||'').trim();
+      const p=(document.getElementById('p-'+r.id)?.value||'').trim();
+      return !n && !p;
+    }).map(r=>r.id);
+    emptyIds.forEach(id=>{
+      sRows=sRows.filter(r=>r.id!==id);
+      const el=document.getElementById('rw-'+id);
+      if(el)el.remove();
+    });
+    addSale({name:item.name,price:item.price});
+  } else {
+    // Same for replacement rows
+    const emptyIds=rRows.filter(r=>{
+      const n=(document.getElementById('n-'+r.id)?.value||'').trim();
+      const p=(document.getElementById('p-'+r.id)?.value||'').trim();
+      return !n && !p;
+    }).map(r=>r.id);
+    emptyIds.forEach(id=>{
+      rRows=rRows.filter(r=>r.id!==id);
+      const el=document.getElementById('rw-'+id);
+      if(el)el.remove();
+    });
+    addRepl({name:item.name,price:item.price});
+  }
+  closeM('m-fetch');toast('"'+item.name+'" added');
+}
+
+// ── FETCH SEARCH FILTER ──
+let _fetchCache=[];
+function filterFetch(){
+  const q=(document.getElementById('fetch-search')?.value||'').toLowerCase().trim();
+  const items=q?_fetchCache.filter(i=>i.name.toLowerCase().includes(q)):_fetchCache;
+  renderFetchList(items);
+}
+function renderFetchList(items){
+  const el=document.getElementById('flist');
+  if(!items.length){
+    el.innerHTML='<div class="empty" style="padding:16px"><div class="empty-ico" style="font-size:22px">🔍</div><div class="empty-s">No match — add below</div></div>';
+    return;
+  }
+  el.innerHTML=items.map(i=>`
+    <div class="fi" onclick="doFetch('${i.id}')">
+      <div class="fi-ico">📦</div>
+      <div class="fi-info"><div class="fi-name">${esc(i.name)}</div><div class="fi-price">${INR(i.price)} per piece</div></div>
+      <div class="fi-arr">›</div>
+    </div>`).join('');
+}
+
+// ── ADD FROM FETCH MODAL AND SAVE TO LIB ──
+function addAndFetch(){
+  const name=(document.getElementById('fn-name')?.value||'').trim();
+  const price=document.getElementById('fn-price')?.value;
+  if(!name){toast('Enter item name','e');document.getElementById('fn-name').focus();return}
+  if(!price||parseFloat(price)<=0){toast('Enter valid price','e');document.getElementById('fn-price').focus();return}
+  // Save to library
+  const ei=lib.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(ei>=0){lib[ei].price=price;}
+  else{lib.push({id:'l'+Date.now(),name,price});}
+  sv(LK,lib);
+  // Now fetch it
+  const item=lib.find(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(item){
+    if(fTarget2==='sale'){
+      const emptyIds=sRows.filter(r=>{const n=(document.getElementById('n-'+r.id)?.value||'').trim();const p=(document.getElementById('p-'+r.id)?.value||'').trim();return !n&&!p;}).map(r=>r.id);
+      emptyIds.forEach(id=>{sRows=sRows.filter(r=>r.id!==id);const el=document.getElementById('rw-'+id);if(el)el.remove();});
+      addSale({name:item.name,price:item.price});
+    } else {
+      const emptyIds=rRows.filter(r=>{const n=(document.getElementById('n-'+r.id)?.value||'').trim();const p=(document.getElementById('p-'+r.id)?.value||'').trim();return !n&&!p;}).map(r=>r.id);
+      emptyIds.forEach(id=>{rRows=rRows.filter(r=>r.id!==id);const el=document.getElementById('rw-'+id);if(el)el.remove();});
+      addRepl({name:item.name,price:item.price});
+    }
+  }
+  document.getElementById('fn-name').value='';
+  document.getElementById('fn-price').value='';
+  closeM('m-fetch');
+  toast('"'+ name +'" added & saved to library');
+}
+
+// ── LIBRARY SEARCH FILTER ──
+function filterLib(){
+  const q=(document.getElementById('lib-search')?.value||'').toLowerCase().trim();
+  lib=ld(LK);
+  const items=q?lib.filter(i=>i.name.toLowerCase().includes(q)):lib;
+  const el=document.getElementById('lib-items');
+  if(!items.length){el.innerHTML='<div class="empty"><div class="empty-ico">🔍</div><div class="empty-s">No items match your search</div></div>';return}
+  el.innerHTML=items.map(i=>`
+    <div class="lib-item" id="li-${i.id}">
+      <div class="lib-view" style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="lib-ico">📦</div>
+        <div class="lib-info"><div class="lib-name">${esc(i.name)}</div><div class="lib-price">${INR(i.price)} per piece</div></div>
+        <div class="lib-acts">
+          <button class="btn btn-g btn-ic btn-xs" onclick="startLE('${i.id}')">✏️</button>
+          <button class="btn btn-r btn-ic btn-xs" onclick="delLib('${i.id}')">🗑</button>
+        </div>
+      </div>
+      <div id="lef-${i.id}" class="lib-ef">
+        <input class="inp" type="text" id="len-${i.id}" value="${esc(i.name)}" style="flex:2;min-width:0;font-size:13px;padding:9px 10px"/>
+        <div class="pfx-wrap" style="flex:1;min-width:0"><span class="pfx">₹</span><input class="inp" type="number" id="lep-${i.id}" value="${i.price}" step="0.01" style="font-size:13px;padding:9px 10px 9px 22px"/></div>
+        <button class="btn btn-a btn-ic btn-xs" onclick="saveLE('${i.id}')">✓</button>
+        <button class="btn btn-g btn-ic btn-xs" onclick="cancelLE('${i.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── DRIVER LIBRARY ──
+function openDriverLib(){
+  driverLib=ld(DLK);
+  document.getElementById('dl-search').value='';
+  renderDriverList(driverLib);
+  openM('m-driverlib');
+}
+function filterDriverLib(){
+  const q=(document.getElementById('dl-search')?.value||'').toLowerCase().trim();
+  driverLib=ld(DLK);
+  renderDriverList(q?driverLib.filter(d=>(d.name+d.phone+d.vehicle).toLowerCase().includes(q)):driverLib);
+}
+function renderDriverList(items){
+  const el=document.getElementById('dl-list');
+  if(!items.length){
+    el.innerHTML='<div class="empty" style="padding:14px"><div class="empty-ico" style="font-size:22px">🚗</div><div class="empty-s">No saved drivers yet</div></div>';
+    return;
+  }
+  el.innerHTML=items.map(d=>`
+    <div class="fi" onclick="selectDriver('${d.id}')">
+      <div class="fi-ico">🚗</div>
+      <div class="fi-info">
+        <div class="fi-name">${esc(d.name)}</div>
+        <div class="fi-price">${d.phone?'📞 '+esc(d.phone):''}${d.vehicle?' · 🔢 '+esc(d.vehicle):''}</div>
+      </div>
+      <div style="display:flex;gap:4px;align-items:center">
+        <button class="btn btn-r btn-xs btn-ic" onclick="event.stopPropagation();delDriver('${d.id}')" style="font-size:11px">🗑</button>
+        <div class="fi-arr">›</div>
+      </div>
+    </div>`).join('');
+}
+function selectDriver(id){
+  const d=driverLib.find(x=>x.id===id);if(!d)return;
+  document.getElementById('veh-driver').value=d.name||''
+  document.getElementById('veh-phone').value=d.phone||''
+  const vn=document.getElementById('veh-number');
+  if(d.vehicle)vn.value=d.vehicle.toUpperCase();
+  closeM('m-driverlib');
+  toast('Driver "'+d.name+'" loaded');
+}
+function addDriverToLib(){
+  const name=(document.getElementById('dn-name').value||'').trim();
+  if(!name){toast('Enter driver name','e');document.getElementById('dn-name').focus();return}
+  const phone=(document.getElementById('dn-phone').value||'').trim();
+  const vehicle=(document.getElementById('dn-vehicle').value||'').trim().toUpperCase();
+  driverLib=ld(DLK);
+  const ei=driverLib.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(ei>=0){driverLib[ei].phone=phone;driverLib[ei].vehicle=vehicle;toast('"'+name+'" updated');}
+  else{driverLib.push({id:'d'+Date.now(),name,phone,vehicle});toast('"'+name+'" saved to driver library');}
+  sv(DLK,driverLib);
+  document.getElementById('dn-name').value='';document.getElementById('dn-phone').value='';document.getElementById('dn-vehicle').value='';
+  renderDriverList(driverLib);
+}
+function saveDriverToLib(){
+  const name=(document.getElementById('veh-driver').value||'').trim();
+  if(!name){toast('Enter driver name first','e');document.getElementById('veh-driver').focus();return}
+  const phone=(document.getElementById('veh-phone').value||'').trim();
+  const vehicle=(document.getElementById('veh-number').value||'').trim().toUpperCase();
+  driverLib=ld(DLK);
+  const ei=driverLib.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(ei>=0){driverLib[ei].phone=phone;driverLib[ei].vehicle=vehicle;toast('"'+name+'" updated in library');}
+  else{driverLib.push({id:'d'+Date.now(),name,phone,vehicle});toast('"'+name+'" saved to driver library ✓');}
+  sv(DLK,driverLib);
+}
+function delDriver(id){
+  driverLib=ld(DLK);
+  const d=driverLib.find(x=>x.id===id);
+  if(!confirm('Remove driver "'+d?.name+'"?')){return}
+  driverLib=driverLib.filter(x=>x.id!==id);
+  sv(DLK,driverLib);
+  renderDriverList(driverLib);
+  toast('Removed');
+}
+
+// ── SAVE BILL ──
+function openSave(){
+  if(!validateQty())return;
+  const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
+  if(sT===0){toast('Add items with price & qty','e');return}
+  document.getElementById('sname').value=document.getElementById('party-name').value||'';
+  openM('m-save');setTimeout(()=>document.getElementById('sname')?.focus(),280);
+}
+function doSave(){
+  const name=document.getElementById('sname').value.trim();
+  if(!name){toast('Enter a bill name','e');return}
+  const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
+  const rT=replOn?rRows.reduce((s,r)=>s+rowT(r.id),0):0;
+  const adv=advOn?(parseFloat(document.getElementById('adv-amt').value)||0):0;
+  const rawNet=sT-rT-adv;
+  const net=Math.max(0,rawNet);
+  const extra=rawNet<0?Math.abs(rawNet):0;
+  // Payment status
+  const paymentStatus=adv<=0?'pending':(net===0&&extra===0)?'paid':'due';
+  const getI=ids=>ids.map(r=>({
+    name:document.getElementById('n-'+r.id)?.value||'',
+    price:parseFloat(document.getElementById('p-'+r.id)?.value)||0,
+    qty:parseFloat(document.getElementById('q-'+r.id)?.value)||0,
+    total:rowT(r.id)
+  })).filter(x=>x.total>0);
+  const bill={
+    id:'b'+Date.now(),name,
+    billType,
+    party:(document.getElementById('party-name').value||'').trim(),
+    partyPhone:(document.getElementById('party-phone').value||'').trim(),
+    vehicle:vehicleOn?{
+      driver:(document.getElementById('veh-driver').value||'').trim(),
+      phone:(document.getElementById('veh-phone').value||'').trim(),
+      number:(document.getElementById('veh-number').value||'').trim().toUpperCase()
+    }:null,
+    date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),
+    saleItems:getI(sRows),
+    replItems:replOn?getI(rRows):[],
+    sT,rT,adv,net,extra,paymentStatus,
+    payMode,
+    upiReceivedBy:getUpiReceiver()
+  };
+  bills.unshift(bill);sv(BK,bills);
+  closeM('m-save');toast('🎉 Bill saved!');
+  setTimeout(()=>{goTo('home');resetBill()},500);
+}
+
+// ── LIBRARY ──
+function addToLib(){
+  const nameEl=document.getElementById('lib-new-name');
+  const priceEl=document.getElementById('lib-new-price');
+  const name=nameEl.value.trim();
+  const price=priceEl.value;
+  if(!name){toast('Enter item name','e');nameEl.focus();return}
+  if(!price||parseFloat(price)<=0){toast('Enter valid price','e');priceEl.focus();return}
+  const ei=lib.findIndex(x=>x.name.toLowerCase()===name.toLowerCase());
+  if(ei>=0){lib[ei].price=price;toast('"'+name+'" price updated')}
+  else{lib.push({id:'l'+Date.now(),name,price});toast('"'+name+'" added to library')}
+  sv(LK,lib);
+  nameEl.value='';priceEl.value='';nameEl.focus();
+  renderLibItems();
+}
+function renderLib(){
+  lib=ld(LK);
+  $t('lib-ct',lib.length+' items');
+  renderLibItems();
+}
+function renderLibItems(){
+  lib=ld(LK);
+  $t('lib-ct',lib.length+' items');
+  const el=document.getElementById('lib-items');
+  if(!lib.length){el.innerHTML='<div class="empty"><div class="empty-ico">📦</div><div class="empty-t">No items yet</div><div class="empty-s">Add items above to get started</div></div>';return}
+  el.innerHTML=lib.map(i=>`
+    <div class="lib-item" id="li-${i.id}">
+      <div class="lib-view" style="display:flex;align-items:center;gap:12px;width:100%">
+        <div class="lib-ico">📦</div>
+        <div class="lib-info"><div class="lib-name">${esc(i.name)}</div><div class="lib-price">${INR(i.price)} per piece</div></div>
+        <div class="lib-acts">
+          <button class="btn btn-g btn-ic btn-xs" onclick="startLE('${i.id}')">✏️</button>
+          <button class="btn btn-r btn-ic btn-xs" onclick="delLib('${i.id}')">🗑</button>
+        </div>
+      </div>
+      <div id="lef-${i.id}" class="lib-ef">
+        <input class="inp" type="text" id="len-${i.id}" value="${esc(i.name)}" style="flex:2;min-width:0;font-size:13px;padding:9px 10px"/>
+        <div class="pfx-wrap" style="flex:1;min-width:0"><span class="pfx">₹</span><input class="inp" type="number" id="lep-${i.id}" value="${i.price}" step="0.01" style="font-size:13px;padding:9px 10px 9px 22px"/></div>
+        <button class="btn btn-a btn-ic btn-xs" onclick="saveLE('${i.id}')">✓</button>
+        <button class="btn btn-g btn-ic btn-xs" onclick="cancelLE('${i.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+function startLE(id){document.querySelector(`#li-${id} .lib-view`).style.display='none';document.getElementById('lef-'+id).style.display='flex';document.getElementById('len-'+id).focus()}
+function cancelLE(id){document.querySelector(`#li-${id} .lib-view`).style.display='flex';document.getElementById('lef-'+id).style.display='none'}
+function saveLE(id){
+  const n=document.getElementById('len-'+id).value.trim(),p=document.getElementById('lep-'+id).value;
+  if(!n){toast('Name required','e');return}
+  const i=lib.findIndex(x=>x.id===id);if(i>=0){lib[i].name=n;lib[i].price=p}
+  sv(LK,lib);renderLibItems();toast('Updated!');
+}
+function delLib(id){
+  const item=lib.find(x=>x.id===id);
+  if(!confirm(`Remove "${item?.name}"?`))return;
+  lib=lib.filter(x=>x.id!==id);sv(LK,lib);renderLibItems();toast('Removed');
+}
+
+// ── VEHICLE RENDER HELPER ──
+function renderVehicle(v){
+  if(!v||(!(v.driver)&&!(v.number)))return'';
+  let parts=[];
+  if(v.driver)parts.push('🚗 '+esc(v.driver));
+  if(v.phone)parts.push('📞 '+esc(v.phone));
+  if(v.number)parts.push('🔢 '+esc(v.number));
+  return '<div style="font-size:11px;color:var(--ink3);font-weight:600;margin-top:2px">'+parts.join(' · ')+'</div>';
+}
+
+// ── SAVED BILLS ──
+function renderBills(){
+  bills=ld(BK);
+  filterBills(); // delegates rendering to filterBills
+}
+function _legacyRenderBills_DISABLED(){
+  const el=document.getElementById('bills-list');
+  if(!bills.length){el.innerHTML='<div class="empty"><div class="empty-ico">🧾</div><div class="empty-t">No bills yet</div><div class="empty-s">Create and save your first bill</div></div>';return}
+  el.innerHTML=bills.map(b=>`
+    <div class="bc">
+      <div class="bc-top">
+        <div class="bc-dot"></div>
+        <div style="flex:1">
+          <div class="bc-name">${esc(b.name)} <span style="font-size:11px;font-weight:600;color:var(--ink3)">${b.billType==="in"?"🏭 In-Company":"🚚 Out-Company"}</span></div>
+          ${b.party?`<div class="bc-party">👤 ${esc(b.party)}${b.partyPhone?" · 📞"+esc(b.partyPhone):""}</div>`:''}
+          ${renderVehicle(b.vehicle)}
+          <div class="bc-date">${b.date} · ${b.saleItems?.length||0} items</div>
+        </div>
+        <div class="bc-acts" style="align-items:flex-end">
+          <div class="status-badge ${billStatus(b)}" style="margin-bottom:4px">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
+          <div style="display:flex;gap:6px">
+            <button class="btn-wa btn-sm" onclick="shareBillWA('${b.id}')">📲 WA</button>
+            <button class="btn btn-r btn-xs" onclick="delBill('${b.id}')">🗑</button>
+          </div>
+        </div>
+      </div>
+      ${b.saleItems?.length?`
+      <table class="bc-tbl">
+        <thead><tr><th>Item</th><th>₹/pc</th><th>Qty</th><th>Total</th></tr></thead>
+        <tbody>
+          ${b.saleItems.map(i=>`<tr><td style="color:var(--ink);font-weight:700">${esc(i.name||'—')}</td><td>${INR(i.price)}</td><td>${i.qty}</td><td>${INR(i.total)}</td></tr>`).join('')}
+          <tr style="background:var(--abg)">
+            <td colspan="3" style="font-size:11px;text-transform:uppercase;font-weight:800;color:var(--ink3)">To Collect</td>
+            <td style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--accent)">${INR(b.sT)}</td>
+          </tr>
+        </tbody>
+      </table>`:''}
+      ${b.replItems?.length&&b.rT>0?`
+      <div class="bc-sec-lbl r">🔄 Replacements Deducted</div>
+      <table class="bc-tbl">
+        <tbody>
+          ${b.replItems.map(i=>`<tr class="repl"><td style="color:var(--ink);font-weight:700">${esc(i.name||'—')}</td><td>${INR(i.price)}</td><td>${i.qty}</td><td style="color:var(--red)">${INR(i.total)}</td></tr>`).join('')}
+          <tr style="background:var(--rbg)">
+            <td colspan="3" style="font-size:11px;text-transform:uppercase;font-weight:800;color:var(--red)">Deducted</td>
+            <td style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--red)">${INR(b.rT)}</td>
+          </tr>
+        </tbody>
+      </table>`:''}
+      <div class="bc-foot">
+        <div style="flex:1">
+          ${b.adv>0?`<div class="bcf-adv">💳 Advance: ${INR(b.adv)} · ${b.payMode==='upi'?'📱 UPI':'💵 Cash'}${b.upiReceivedBy?' ('+esc(b.upiReceivedBy)+')':''}</div>`:''}
+          ${b.rT>0?`<div class="bcf-repl">🔄 Replaced: ${INR(b.rT)}</div>`:''}
+          <div class="bcf-lbl" style="margin-top:4px">${bcFootLabel(b)}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <div class="bcf-val ${bcFootValClass(b)}">${bcFootVal(b)}</div>
+          <div class="status-badge ${billStatus(b)}">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
+        </div>
+      </div>
+      ${b.billType==='in'&&billStatus(b)==='due'?`
+      <div style="padding:10px 14px;background:var(--bg2);border-top:1px solid var(--border)">
+        <button class="btn-prcv" onclick="openPaymentReceived('${b.id}')">💰 Payment Received</button>
+      </div>`:''}
+      ${b.payLog&&b.payLog.length?`
+      <div class="pay-log">
+        <div style="padding:7px 14px 4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Payment History</div>
+        ${b.payLog.map(p=>`
+        <div class="pay-log-row">
+          <div>
+            <div class="pay-log-who">👤 ${esc(p.who||'Unknown')}${p.phone?' · 📞'+esc(p.phone):''}</div>
+            <div class="pay-log-date">${p.date}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="pay-log-amt">+${INR(p.amount)}</div>
+            ${p.note?`<div style="font-size:10px;color:var(--ink3)">${esc(p.note)}</div>`:''}
+          </div>
+        </div>`).join('')}
+      </div>`:''}
+    </div>`).join('');
+}
+// ── BILL FOOTER HELPERS ──
+function billRemainingDue(b){
+  // net = amount still to collect after advance/replacements
+  // subtract all payment log entries
+  const paidSoFar=(b.payLog||[]).reduce((s,p)=>s+(parseFloat(p.amount)||0),0);
+  const base=b.net||0;
+  return base-paidSoFar;
+}
+function bcFootLabel(b){
+  const rem=billRemainingDue(b);
+  if(rem<0)return'Extra Collected';
+  if(rem===0&&(b.adv>0||(b.payLog&&b.payLog.length)))return'Fully Settled';
+  return'Amount to Collect';
+}
+function bcFootValClass(b){
+  const rem=billRemainingDue(b);
+  if(rem<0)return'bcf-val extra';
+  if(rem===0&&(b.adv>0||(b.payLog&&b.payLog.length)))return'bcf-val zero';
+  return'bcf-val';
+}
+function bcFootVal(b){
+  const rem=billRemainingDue(b);
+  if(rem<0)return'Extra '+INR(Math.abs(rem));
+  return INR(Math.max(0,rem));
+}
+function billStatus(b){
+  if(b.paymentStatus)return b.paymentStatus;
+  const rem=billRemainingDue(b);
+  if(rem<0)return'paid'; // extra collected = paid
+  if(rem===0&&(b.adv>0||(b.payLog&&b.payLog.length)))return'paid';
+  if(!b.adv&&!(b.payLog&&b.payLog.length))return'pending';
+  return'due';
+}
+function billStatusLabel(b){
+  const s=billStatus(b);
+  if(s==='paid')return'Paid';
+  if(s==='due')return'Due';
+  return'Pending';
+}
+function billStatusIcon(b){
+  const s=billStatus(b);
+  if(s==='paid')return'✅';
+  if(s==='due')return'🔴';
+  return'🕐';
+}
+function delBill(id){
+  const b=bills.find(x=>x.id===id);
+  if(!confirm(`Delete bill "${b?.name}"?`))return;
+  bills=bills.filter(x=>x.id!==id);sv(BK,bills);renderBills();toast('Bill deleted');
+}
+
+// ── BILLS SEARCH / FILTER / SORT ──
+let _billStatusFilter='all';
+function setStatusFilter(val,el){
+  _billStatusFilter=val;
+  document.querySelectorAll('#status-chips .fchip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  filterBills();
+}
+function filterBills(){
+  bills=ld(BK);
+  const q=(document.getElementById('bill-search')?.value||'').toLowerCase().trim();
+  const sort=document.getElementById('bill-sort')?.value||'date-desc';
+  let filtered=bills.filter(b=>{
+    // Status/type filter
+    if(_billStatusFilter!=='all'){
+      if(_billStatusFilter==='in'||_billStatusFilter==='out'){
+        if(b.billType!==_billStatusFilter)return false;
+      } else {
+        if(billStatus(b)!==_billStatusFilter)return false;
+      }
+    }
+    // Text search
+    if(!q)return true;
+    const searchable=[
+      b.name||''
+      ,b.party||''
+      ,b.date||''
+      ,String(b.net||0)
+      ,String(b.sT||0)
+      ,String(b.saleItems?.length||0)
+      ,...(b.saleItems||[]).map(i=>i.name||'')    ].join(' ').toLowerCase();
+    return searchable.includes(q);
+  });
+  // Sort
+  filtered.sort((a,b)=>{
+    if(sort==='date-desc')return(b.id||0)>(a.id||0)?1:-1;
+    if(sort==='date-asc')return(a.id||0)>(b.id||0)?1:-1;
+    if(sort==='amount-desc')return(b.net||0)-(a.net||0);
+    if(sort==='amount-asc')return(a.net||0)-(b.net||0);
+    if(sort==='name-asc')return(a.name||'').localeCompare(b.name||'');
+    if(sort==='items-desc')return(b.saleItems?.length||0)-(a.saleItems?.length||0);
+    return 0;
+  });
+  $t('bills-ct',filtered.length+' bills');
+  const ct=document.getElementById('bills-result-ct');
+  if(ct)ct.textContent=q||_billStatusFilter!=='all'?`Showing ${filtered.length} of ${bills.length} bills`:'';
+  const el=document.getElementById('bills-list');
+  if(!el)return;
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empty-ico">🔍</div><div class="empty-t">No bills match</div><div class="empty-s">Try changing search or filter</div></div>';return}
+  el.innerHTML=filtered.map(b=>`
+    <div class="bc">
+      <div class="bc-top">
+        <div class="bc-dot"></div>
+        <div style="flex:1">
+          <div class="bc-name">${esc(b.name)} <span style="font-size:11px;font-weight:600;color:var(--ink3)">${b.billType==="in"?"🏭 In-Company":"🚚 Out-Company"}</span></div>
+          ${b.party?`<div class="bc-party">👤 ${esc(b.party)}${b.partyPhone?" · 📞"+esc(b.partyPhone):""}</div>`:''}
+          ${renderVehicle(b.vehicle)}
+          <div class="bc-date">${b.date} · ${b.saleItems?.length||0} items · Net: ${INR(billRemainingDue(b))}</div>
+        </div>
+        <div class="bc-acts" style="align-items:flex-end">
+          <div class="status-badge ${billStatus(b)}" style="margin-bottom:4px">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
+          <div style="display:flex;gap:6px">
+            <button class="btn-wa btn-sm" onclick="shareBillWA('${b.id}')">📲 WA</button>
+            <button class="btn btn-r btn-xs" onclick="delBill('${b.id}')">🗑</button>
+          </div>
+        </div>
+      </div>
+      ${b.saleItems?.length?`
+      <table class="bc-tbl">
+        <thead><tr><th>Item</th><th>₹/pc</th><th>Qty</th><th>Total</th></tr></thead>
+        <tbody>
+          ${b.saleItems.map(i=>`<tr><td style="color:var(--ink);font-weight:700">${esc(i.name||'—')}</td><td>${INR(i.price)}</td><td>${i.qty}</td><td>${INR(i.total)}</td></tr>`).join('')}
+          <tr style="background:var(--abg)">
+            <td colspan="3" style="font-size:11px;text-transform:uppercase;font-weight:800;color:var(--ink3)">To Collect</td>
+            <td style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--accent)">${INR(b.sT)}</td>
+          </tr>
+        </tbody>
+      </table>`:''}
+      ${b.replItems?.length&&b.rT>0?`
+      <div class="bc-sec-lbl r">🔄 Replacements Deducted</div>
+      <table class="bc-tbl">
+        <tbody>
+          ${b.replItems.map(i=>`<tr class="repl"><td style="color:var(--ink);font-weight:700">${esc(i.name||'—')}</td><td>${INR(i.price)}</td><td>${i.qty}</td><td style="color:var(--red)">${INR(i.total)}</td></tr>`).join('')}
+          <tr style="background:var(--rbg)">
+            <td colspan="3" style="font-size:11px;text-transform:uppercase;font-weight:800;color:var(--red)">Deducted</td>
+            <td style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:800;color:var(--red)">${INR(b.rT)}</td>
+          </tr>
+        </tbody>
+      </table>`:''}
+      <div class="bc-foot">
+        <div style="flex:1">
+          ${b.adv>0?`<div class="bcf-adv">💳 Advance: ${INR(b.adv)} · ${b.payMode==='upi'?'📱 UPI':'💵 Cash'}${b.upiReceivedBy?' ('+esc(b.upiReceivedBy)+')':''}</div>`:''}
+          ${b.rT>0?`<div class="bcf-repl">🔄 Replaced: ${INR(b.rT)}</div>`:''}
+          <div class="bcf-lbl" style="margin-top:4px">${bcFootLabel(b)}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+          <div class="${bcFootValClass(b)}">${bcFootVal(b)}</div>
+          <div class="status-badge ${billStatus(b)}">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
+        </div>
+      </div>
+      ${b.billType==='in'&&billStatus(b)==='due'?`
+      <div style="padding:10px 14px;background:var(--bg2);border-top:1px solid var(--border)">
+        <button class="btn-prcv" onclick="openPaymentReceived('${b.id}')">💰 Payment Received</button>
+      </div>`:''}
+      ${b.payLog&&b.payLog.length?`
+      <div class="pay-log">
+        <div style="padding:7px 14px 4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3)">Payment History</div>
+        ${b.payLog.map(p=>`
+        <div class="pay-log-row">
+          <div>
+            <div class="pay-log-who">👤 ${esc(p.who||'Unknown')}${p.phone?' · 📞'+esc(p.phone):''}</div>
+            <div class="pay-log-date">${p.date}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="pay-log-amt">+${INR(p.amount)}</div>
+            ${p.note?`<div style="font-size:10px;color:var(--ink3)">${esc(p.note)}</div>`:''}
+          </div>
+        </div>`).join('')}
+      </div>`:''}
+    </div>`).join('');
+}
+
+// ── PAYMENT RECEIVED ──
+let _prcvBillId=null;
+function openPaymentReceived(billId){
+  const b=bills.find(x=>x.id===billId);if(!b)return;
+  _prcvBillId=billId;
+  const rem=billRemainingDue(b);
+  $t('prcv-bill-name',b.name);
+  $t('prcv-to-collect-val',INR(rem));
+  document.getElementById('prcv-amt').value='';
+  document.getElementById('prcv-fmt').style.display='none';
+  document.getElementById('prcv-who').value=b.party||'';
+  document.getElementById('prcv-phone').value=b.partyPhone||'';
+  const res=document.getElementById('prcv-result');
+  res.className='prcv-result';res.style.display='none';
+  openM('m-prcv');
+  setTimeout(()=>document.getElementById('prcv-amt')?.focus(),280);
+}
+function onPrcvAmt(el){
+  let raw=el.value.replace(/[^0-9.]/g,'');
+  const parts=raw.split('.');if(parts.length>2)raw=parts[0]+'.'+parts.slice(1).join('');
+  el.value=raw;
+  const num=parseFloat(raw)||0;
+  const fmt=document.getElementById('prcv-fmt');
+  if(num>0){fmt.textContent='= '+INR(num);fmt.style.display='block';}else{fmt.style.display='none';}
+  // Show result preview
+  const b=bills.find(x=>x.id===_prcvBillId);if(!b)return;
+  const rem=billRemainingDue(b);
+  const res=document.getElementById('prcv-result');
+  if(num<=0){res.style.display='none';return;}
+  const diff=rem-num; // positive=still due, negative=extra, zero=exact
+  res.style.display='block';
+  if(diff===0){
+    res.className='prcv-result paid';
+    $t('prcv-result-lbl','✅ Fully Paid');
+    $t('prcv-result-val','Bill Settled!');
+  } else if(diff>0){
+    res.className='prcv-result due';
+    $t('prcv-result-lbl','🔴 Still Due');
+    $t('prcv-result-val',INR(diff)+' remaining');
+  } else {
+    res.className='prcv-result extra';
+    $t('prcv-result-lbl','🟢 Extra Collected');
+    $t('prcv-result-val',INR(Math.abs(diff))+' extra');
+  }
+}
+async function prcvPickContact(){
+  if(!navigator.contacts){toast('Contacts not supported on this device','e');return;}
+  try{
+    const c=await navigator.contacts.select(['name','tel'],{multiple:false});
+    if(!c||!c.length)return;
+    const entry=c[0];
+    if(entry.name?.length)document.getElementById('prcv-who').value=entry.name[0];
+    if(entry.tel?.length){
+      let ph=entry.tel[0].replace(/[\s\-\(\)]/g,'');
+      if(ph.startsWith('+91'))ph=ph.slice(3);
+      document.getElementById('prcv-phone').value=fmtPhone(ph);
+    }
+  }catch(e){toast('Could not access contacts','e');}
+}
+function prcvPickFromParty(){
+  const b=bills.find(x=>x.id===_prcvBillId);if(!b)return;
+  if(b.party)document.getElementById('prcv-who').value=b.party;
+  if(b.partyPhone)document.getElementById('prcv-phone').value=b.partyPhone;
+  toast('Party details filled');
+}
+function confirmPayment(){
+  const amtRaw=document.getElementById('prcv-amt').value;
+  const amount=parseFloat(amtRaw)||0;
+  if(amount<=0){toast('Enter amount received','e');document.getElementById('prcv-amt').focus();return;}
+  const who=(document.getElementById('prcv-who').value||'').trim();
+  const phone=(document.getElementById('prcv-phone').value||'').trim();
+  const b=bills.find(x=>x.id===_prcvBillId);if(!b)return;
+  const rem=billRemainingDue(b);
+  const diff=rem-amount;
+  let note='',newStatus='';
+  if(diff===0){note='Fully paid';newStatus='paid';}
+  else if(diff>0){note='Partial — '+INR(diff)+' still due';newStatus='due';}
+  else{note='Extra '+INR(Math.abs(diff))+' collected';newStatus='paid';}
+  // Add to payLog
+  const logEntry={
+    amount,who,phone,note,
+    date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})
+  };
+  bills=ld(BK);
+  const bi=bills.findIndex(x=>x.id===_prcvBillId);
+  if(bi<0)return;
+  if(!bills[bi].payLog)bills[bi].payLog=[];
+  bills[bi].payLog.push(logEntry);
+  bills[bi].paymentStatus=newStatus;
+  sv(BK,bills);
+  closeM('m-prcv');
+  filterBills();
+  if(newStatus==='paid')toast('✅ Marked as Paid!');
+  else toast('💰 Payment recorded — '+INR(diff)+' still due');
+}
+
+// ── MODAL ──
+function openM(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
+function closeM(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
+document.querySelectorAll('.ov').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeM(el.id)}));
+
+// ── UTIL ──
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// ── BILL TYPE PICKER ──
+function openBillPicker(){
+  openM('m-billtype');
+}
+function chooseBillType(type){
+  closeM('m-billtype');
+  setTimeout(()=>{goTo('bill');resetBill(type)},120);
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',function(){
+  refreshHome();
+  setBillType('in');
+  addSale();
+});
+</script>
+</body>
+</html>
