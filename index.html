@@ -97,6 +97,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
 
 /* ── FORM ELEMENTS ── */
 .flbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:5px}
+.vph-wrap{position:relative;width:80px;height:80px;flex-shrink:0;display:inline-block}
+.vph-wrap img{width:80px;height:80px;object-fit:cover;border-radius:10px;border:1.5px solid var(--border);display:block}
+.vph-del{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#e53935;color:#fff;border:2px solid #fff;font-size:13px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(0,0,0,.35);padding:0;line-height:1;z-index:10}
 .inp{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border2);background:var(--bg2);color:var(--ink);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;transition:border-color .15s}
 .inp:focus{border-color:var(--accent);background:var(--card)}
 .pfx-wrap{position:relative}
@@ -418,17 +421,16 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
         <div class="flbl">Vehicle Number</div>
         <input class="inp" type="text" id="veh-number" placeholder="e.g. MH12AB1234" autocomplete="off" oninput="this.value=this.value.toUpperCase()"/>
       </div>
-      <!-- Vehicle Photo -->
+      <!-- Vehicle Photos (multi, square crop) -->
       <div>
-        <div class="flbl">Vehicle Photo (optional)</div>
-        <div style="display:flex;gap:10px;align-items:center">
-          <label for="veh-photo-input" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;border:1.5px dashed var(--border2);background:var(--bg2);color:var(--ink2);font-size:12px;font-weight:700;cursor:pointer">📷 Add Photo</label>
-          <input type="file" id="veh-photo-input" accept="image/*" capture="environment" style="display:none" onchange="handleVehPhoto(this)"/>
-          <button class="btn btn-g btn-xs" id="veh-photo-clear" onclick="clearVehPhoto()" style="display:none">✕ Remove</button>
+        <div class="flbl">Vehicle Photos <span style="font-weight:500;color:var(--ink3);font-size:11px">(optional, up to 5)</span></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <label id="veh-photo-add-btn" for="veh-photo-input" style="display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;border:1.5px dashed var(--border2);background:var(--bg2);color:var(--ink2);font-size:12px;font-weight:700;cursor:pointer">📷 Add Photo</label>
+          <input type="file" id="veh-photo-input" accept="image/*" capture="environment" multiple style="display:none" onchange="handleVehPhotos(this)"/>
+          <button class="btn btn-g btn-xs" onclick="clearAllVehPhotos()" id="veh-photo-clear" style="display:none">✕ Remove All</button>
         </div>
-        <div id="veh-photo-preview" style="margin-top:8px;display:none">
-          <img id="veh-photo-img" src="" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px;border:1.5px solid var(--border)"/>
-        </div>
+        <!-- Square photo grid -->
+        <div id="veh-photo-grid" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div>
       </div>
     </div>
   </div>
@@ -543,6 +545,11 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
       <div class="cc-val" id="cc-val">₹0</div>
       <div class="cc-note" id="cc-note"></div>
     </div>
+    <!-- Vehicle Photos Preview in bill summary -->
+    <div id="veh-photos-summary" style="display:none;margin-bottom:10px">
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:8px;padding:0 2px">📷 Vehicle Photos</div>
+      <div id="veh-photos-summary-grid" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </div>
     <div class="bill-cta">
       <button class="btn btn-g" onclick="if(confirm('Clear this bill?'))resetBill()">🗑 Clear</button>
       <button class="btn btn-wa" onclick="shareCurrentBillWA()">📲 WA</button>
@@ -633,6 +640,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
       <div class="ss-row" onclick="togglePref('showParty')"><div class="sr-ico" style="background:var(--abg);border:1px solid var(--abrd)">👤</div><div class="sr-info"><div class="sr-t">Show Party Name</div><div class="sr-s">Show party/customer name in bills</div></div><div class="tog" id="pref-showParty"></div></div>
       <div class="ss-row" onclick="togglePref('showPhone')"><div class="sr-ico" style="background:var(--abg);border:1px solid var(--abrd)">📞</div><div class="sr-info"><div class="sr-t">Show Phone Number</div><div class="sr-s">Include phone in bills & WhatsApp</div></div><div class="tog" id="pref-showPhone"></div></div>
       <div class="ss-row" onclick="togglePref('showVehicle')"><div class="sr-ico" style="background:var(--bg2);border:1px solid var(--border2)">🚗</div><div class="sr-info"><div class="sr-t">Show Vehicle Details</div><div class="sr-s">Include driver & vehicle in bills</div></div><div class="tog" id="pref-showVehicle"></div></div>
+      <div class="ss-row" onclick="togglePref('showVehiclePhotos')"><div class="sr-ico" style="background:var(--bg2);border:1px solid var(--border2)">📷</div><div class="sr-info"><div class="sr-t">Show Vehicle Photos in PDF</div><div class="sr-s">Include vehicle photos at bottom of bill PDF</div></div><div class="tog" id="pref-showVehiclePhotos"></div></div>
       <div class="ss-row" onclick="togglePref('showReceiver')"><div class="sr-ico" style="background:rgba(46,125,82,.1);border:1px solid rgba(46,125,82,.2)">💰</div><div class="sr-info"><div class="sr-t">Show Receiver Name</div><div class="sr-s">Include receiver in payment details</div></div><div class="tog" id="pref-showReceiver"></div></div>
       <div class="ss-row" onclick="togglePref('showReplacements')"><div class="sr-ico" style="background:var(--rbg);border:1px solid var(--rbrd)">🔄</div><div class="sr-info"><div class="sr-t">Show Replacements</div><div class="sr-s">Show replacement deductions in bills</div></div><div class="tog" id="pref-showReplacements"></div></div>
       <div class="ss-row" onclick="togglePref('showBillId')"><div class="sr-ico" style="background:var(--abg);border:1px solid var(--abrd)">🆔</div><div class="sr-info"><div class="sr-t">Show Bill ID</div><div class="sr-s">Show generated Bill ID on bills</div></div><div class="tog" id="pref-showBillId"></div></div>
@@ -831,7 +839,7 @@ function ld(k){try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return
 function sv(k,d){localStorage.setItem(k,JSON.stringify(d))}
 
 // ── PREFS ──
-const DEFAULT_PREFS={showParty:true,showPhone:true,showVehicle:true,showReceiver:true,showReplacements:true,showBillId:true};
+const DEFAULT_PREFS={showParty:true,showPhone:true,showVehicle:true,showVehiclePhotos:true,showReceiver:true,showReplacements:true,showBillId:true};
 function getPrefs(){return Object.assign({},DEFAULT_PREFS,JSON.parse(localStorage.getItem(PK)||'{}'))}
 function savePrefs(p){localStorage.setItem(PK,JSON.stringify(p))}
 function togglePref(key){const p=getPrefs();p[key]=!p[key];savePrefs(p);initPrefs();toast((p[key]?'✓ ':'✗ ')+key.replace('show','Showing '))}
@@ -928,6 +936,7 @@ function toggleVehicle(){
   document.getElementById('veh-tog').className='tog'+(vehicleOn?' on':'');
   document.getElementById('veh-body').className='toggle-body'+(vehicleOn?' open':'');
   $t('veh-sub',vehicleOn?'Driver & vehicle info will appear on bill':'Optional — tap to add driver & vehicle info');
+  _renderVehPhotoGrid();
 }
 function toggleRepl(){
   replOn=!replOn;
@@ -1105,7 +1114,7 @@ function recalc(){
 }
 
 // ── RESET BILL ──
-function resetBill(type){
+function resetBill(type){vehPhotos=[];_renderVehPhotoGrid();
   sRows=[];rRows=[];_sno=0;rid=0;
   document.getElementById('sale-body').innerHTML='';
   document.getElementById('repl-body').innerHTML='<div class="empty" style="padding:14px"><div class="empty-ico" style="font-size:20px">🔄</div><div class="empty-s">Tap "+ Add item" above</div></div>';
@@ -1176,27 +1185,103 @@ async function pickPartyContact(){
 }
 
 // ── VEHICLE PHOTO ──
-let vehPhotoData=null;
-function handleVehPhoto(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    vehPhotoData=e.target.result;
-    const img=document.getElementById('veh-photo-img');
-    if(img)img.src=vehPhotoData;
-    $s('veh-photo-preview','display','block');
-    $s('veh-photo-clear','display','inline-flex');
-    toast('Photo added ✓');
+let vehPhotos=[]; // array of base64 strings, max 5
+
+function _cropSquare(dataUrl,cb){
+  // Crop image to square from center using canvas
+  var img=new Image();
+  img.onload=function(){
+    var size=Math.min(img.width,img.height);
+    var sx=(img.width-size)/2, sy=(img.height-size)/2;
+    var canvas=document.createElement('canvas');
+    canvas.width=400;canvas.height=400; // output 400x400
+    var ctx=canvas.getContext('2d');
+    ctx.drawImage(img,sx,sy,size,size,0,0,400,400);
+    cb(canvas.toDataURL('image/jpeg',0.85));
   };
-  reader.readAsDataURL(file);
+  img.src=dataUrl;
 }
-function clearVehPhoto(){
-  vehPhotoData=null;
-  const img=document.getElementById('veh-photo-img');if(img)img.src='';
-  $s('veh-photo-preview','display','none');
-  $s('veh-photo-clear','display','none');
-  const inp=document.getElementById('veh-photo-input');if(inp)inp.value='';
+
+function _renderVehPhotoGrid(){
+  var grid=document.getElementById('veh-photo-grid');
+  var addBtn=document.getElementById('veh-photo-add-btn');
+  var clearBtn=document.getElementById('veh-photo-clear');
+  if(!grid)return;
+  grid.innerHTML='';
+  for(var i=0;i<vehPhotos.length;i++){
+    (function(idx,src){
+      var wrap=document.createElement('div');
+      wrap.className='vph-wrap';
+      wrap.style.cssText='position:relative;width:80px;height:80px;flex-shrink:0;display:inline-block';
+      var img=document.createElement('img');
+      img.src=src;
+      img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;border:1.5px solid #ddd;display:block';
+      var del=document.createElement('button');
+      del.style.cssText='position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;'+
+        'background:#e53935;color:#fff;border:2px solid #fff;font-size:13px;cursor:pointer;'+
+        'font-weight:700;display:flex;align-items:center;justify-content:center;'+
+        'box-shadow:0 1px 5px rgba(0,0,0,.35);padding:0;line-height:1;z-index:10';
+      del.innerHTML='&times;';
+      del.onclick=function(e){e.stopPropagation();vehPhotos.splice(idx,1);_renderVehPhotoGrid();};
+      wrap.appendChild(img);
+      wrap.appendChild(del);
+      grid.appendChild(wrap);
+    })(i,vehPhotos[i]);
+  }
+  if(addBtn)addBtn.style.display=vehPhotos.length>=5?'none':'inline-flex';
+  if(clearBtn)clearBtn.style.display=vehPhotos.length>0?'inline-flex':'none';
+  // Also update the summary photos in the bill creation screen
+  var sumSec=document.getElementById('veh-photos-summary');
+  var sumGrid=document.getElementById('veh-photos-summary-grid');
+  if(sumSec&&sumGrid){
+    if(vehicleOn&&vehPhotos.length>0){
+      sumSec.style.display='block';
+      sumGrid.innerHTML='';
+      vehPhotos.forEach(function(src){
+        var img=document.createElement('img');
+        img.src=src;
+        img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;'+
+          'border:1.5px solid var(--border);flex-shrink:0';
+        sumGrid.appendChild(img);
+      });
+    }else{
+      sumSec.style.display='none';
+      sumGrid.innerHTML='';
+    }
+  }
 }
+
+function handleVehPhotos(input){
+  var files=Array.from(input.files||[]);
+  var remaining=5-vehPhotos.length;
+  files=files.slice(0,remaining);
+  if(!files.length)return;
+  var loaded=0;
+  files.forEach(function(file){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      _cropSquare(e.target.result,function(cropped){
+        vehPhotos.push(cropped);
+        loaded++;
+        if(loaded===files.length){
+          _renderVehPhotoGrid();
+          toast(loaded+' photo'+(loaded>1?'s':'')+' added \u2713');
+        }
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value=''; // allow re-selecting same file
+}
+
+function clearAllVehPhotos(){
+  vehPhotos=[];
+  _renderVehPhotoGrid();
+}
+
+// Legacy alias for any old code
+function clearVehPhoto(){clearAllVehPhotos();}
+
 
 // ── DRIVER LIBRARY ──
 function openDriverLib(){
@@ -1413,7 +1498,7 @@ function doSave(){
     name,billType,
     party:(document.getElementById('party-name').value||'').trim(),
     partyPhone:(document.getElementById('party-phone').value||'').trim(),
-    vehicle:vehicleOn?{driver:(document.getElementById('veh-driver').value||'').trim(),phone:(document.getElementById('veh-phone').value||'').trim(),number:(document.getElementById('veh-number').value||'').trim().toUpperCase(),photo:vehPhotoData||null}:null,
+    vehicle:vehicleOn?{driver:(document.getElementById('veh-driver').value||'').trim(),phone:(document.getElementById('veh-phone').value||'').trim(),number:(document.getElementById('veh-number').value||'').trim().toUpperCase(),photos:vehPhotos.length?vehPhotos.slice():null}:null,
     date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),
     saleItems:getI(sRows),replItems:getI(rRows),
     sT,rT,adv,net,extra,paymentStatus,
@@ -1428,12 +1513,21 @@ function doSave(){
 // ── VEHICLE RENDER ──
 function renderVehicle(v){
   if(!v||(!(v.driver)&&!(v.number)))return'';
+  const prefs=getPrefs();
   let parts=[];
   if(v.driver)parts.push('🚗 '+esc(v.driver));
-  if(v.phone)parts.push('📞 '+esc(v.phone));
+  if(prefs.showPhone&&v.phone)parts.push('📞 '+esc(v.phone));
   if(v.number)parts.push('🔢 '+esc(v.number));
   let html='<div style="font-size:11px;color:var(--ink3);font-weight:600;margin-top:2px">'+parts.join(' · ')+'</div>';
-  if(v.photo)html+='<img src="'+v.photo+'" style="width:100%;max-height:100px;object-fit:cover;border-radius:7px;margin-top:5px;border:1.5px solid var(--border)" loading="lazy"/>';
+  // Show photos grid (new multi-photo) or fallback to old single photo
+  const photos=v.photos&&v.photos.length?v.photos:(v.photo?[v.photo]:[]);
+  if(prefs.showVehiclePhotos&&photos.length){
+    html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
+    photos.forEach(function(src){
+      html+='<img src="'+src+'" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border);flex-shrink:0" loading="lazy"/>';
+    });
+    html+='</div>';
+  }
   return html;
 }
 
@@ -1539,6 +1633,7 @@ function filterBills(){
             <div class="status-badge ${st}">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
           </div>
         </div>
+        ${(()=>{const prefs2=getPrefs();const vp=b.vehicle&&(b.vehicle.photos||b.vehicle.photo);const photos=b.vehicle?.photos?.length?b.vehicle.photos:(b.vehicle?.photo?[b.vehicle.photo]:[]);return prefs2.showVehicle&&prefs2.showVehiclePhotos&&photos.length?`<div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg)"><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:8px">📷 Vehicle Photos</div><div style="display:flex;gap:7px;flex-wrap:wrap">${photos.map(src=>`<img src="${src}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border)" loading="lazy"/>`).join('')}</div></div>`:''})()}
         ${b.billType==='in'?st==='due'?`
         <div style="padding:10px 14px;background:var(--bg2);border-top:1px solid var(--border)">
           <button class="btn-prcv" onclick="openPaymentReceived('${b.id}')">💰 Payment Received</button>
@@ -1803,6 +1898,7 @@ function buildBillHTML(b,prefs){
     '.p-grp{}',
     '.p-lbl{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#a09a92;margin-bottom:2px}',
     '.p-val{font-size:12px;font-weight:700;color:#1e1c18}',
+    '.p-sub{font-size:10.5px;color:#6b6560;margin-top:2px;font-weight:500}',
 
     /* Section heading */
     '.sec-hd{padding:14px 24px 6px;font-size:9px;font-weight:800;text-transform:uppercase;',
@@ -1896,11 +1992,11 @@ function buildBillHTML(b,prefs){
   /* ── PARTY / VEHICLE ── */
   if(showParty||showVeh){
     H+='<div class="party-sec">';
-    if(showParty)H+='<div class="p-grp"><div class="p-lbl">Party / Customer</div>'+
-      '<div class="p-val">'+b.party+(prefs.showPhone&&b.partyPhone?' &nbsp;&middot;&nbsp; '+b.partyPhone:'')+'</div></div>';
+    if(showParty){H+='<div class="p-grp"><div class="p-lbl">Party / Customer</div>'+
+      '<div class="p-val">'+b.party+'</div>';if(prefs.showPhone&&b.partyPhone)H+='<div class="p-sub">'+b.partyPhone+'</div>';H+='</div>';}
     if(showVeh){var v=b.vehicle;
       H+='<div class="p-grp"><div class="p-lbl">Driver / Vehicle</div>'+
-        '<div class="p-val">'+(v.driver||'')+(v.number?' &nbsp;&middot;&nbsp; '+v.number:'')+(v.phone?' &nbsp;&middot;&nbsp; '+v.phone:'')+'</div></div>';}
+        '<div class="p-val">'+(v.driver||'')+(v.number?' &nbsp;&middot;&nbsp; '+v.number:'')+'</div>';if(prefs.showPhone&&v.phone)H+='<div class="p-sub">'+v.phone+'</div>';H+='</div>';}
     H+='</div>';
   }
 
@@ -1985,6 +2081,19 @@ function buildBillHTML(b,prefs){
     H+='</div>';
   }
 
+  /* ── VEHICLE PHOTOS ── */
+  var photos=b.vehicle&&b.vehicle.photos&&b.vehicle.photos.length?b.vehicle.photos:
+             (b.vehicle&&b.vehicle.photo?[b.vehicle.photo]:[]);
+  if(prefs.showVehicle&&prefs.showVehiclePhotos&&photos.length){
+    H+='<div class="sec-hd">Vehicle Photos<span></span></div>'+
+       '<div style="padding:0 24px 16px;display:flex;gap:10px;flex-wrap:wrap">';
+    photos.forEach(function(src){
+      H+='<img src="'+src+'" style="width:110px;height:110px;object-fit:cover;'+
+         'border-radius:10px;border:1.5px solid #e8e3d9;"/>';
+    });
+    H+='</div>';
+  }
+
   /* ── FOOTER ── */
   H+='<div class="foot">'+
      '<div class="foot-l">'+
@@ -2060,7 +2169,7 @@ function openCurrentBillPDF(){
     billType,
     party:(document.getElementById('party-name')?.value||'').trim(),
     partyPhone:(document.getElementById('party-phone')?.value||'').trim(),
-    vehicle:vehicleOn?{driver:(document.getElementById('veh-driver')?.value||'').trim(),phone:(document.getElementById('veh-phone')?.value||'').trim(),number:(document.getElementById('veh-number')?.value||'').trim().toUpperCase(),photo:vehPhotoData||null}:null,
+    vehicle:vehicleOn?{driver:(document.getElementById('veh-driver')?.value||'').trim(),phone:(document.getElementById('veh-phone')?.value||'').trim(),number:(document.getElementById('veh-number')?.value||'').trim().toUpperCase(),photos:vehPhotos.length?vehPhotos.slice():null}:null,
     date:new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}),
     saleItems:getItems(sRows),replItems:getItems(rRows),sT,rT,adv,net,extra:rawNet<0?Math.abs(rawNet):0,
     paymentStatus:'pending',payMode,upiReceivedBy:getReceiver(),payLog:[]
