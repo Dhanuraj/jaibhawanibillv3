@@ -265,10 +265,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
 .about-d{font-size:12px;color:var(--ink2);line-height:1.6}
 
 /* ── MODALS/OVERLAYS ── */
-/* overlay backdrop — must cover full screen */
-.ov{position:fixed;inset:0;left:0;right:0;top:0;bottom:0;width:100%;max-width:none;transform:none;background:rgba(0,0,0,.48);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s;max-width:430px;left:50%;transform:translateX(-50%)}
 .ov.open{opacity:1;pointer-events:auto}
-/* sheet inside overlay — constrained to app width */
 .sheet{background:var(--card);border-radius:20px 20px 0 0;padding:20px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(40px);transition:transform .26s ease;box-shadow:var(--sh2)}
 .ov.open .sheet{transform:translateY(0)}
 .sh-knob{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:0 auto 16px}
@@ -286,13 +284,12 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
 .fi-arr{color:var(--ink3);font-size:20px;font-weight:700}
 
 /* ── TOAST ── */
-.pdf-modal-inner{background:var(--card);width:100%;max-width:430px;margin:0 auto;display:flex;flex-direction:column;height:100vh;max-height:100vh;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,1,.28,1)}
-#m-pdf.open .pdf-modal-inner{transform:translateY(0)}
+.pdf-modal-inner{background:var(--card);width:100%;max-width:430px;margin:0 auto;display:flex;flex-direction:column;height:100vh;max-height:100vh}
 #m-pdf{align-items:stretch}
 .pdf-modal-header{padding:13px 16px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;background:var(--card)}
 .pdf-modal-body{flex:1;overflow-y:auto;background:#ddd;padding:8px}
 .pdf-modal-footer{padding:12px 14px;display:flex;gap:10px;border-top:1.5px solid var(--border);flex-shrink:0;background:var(--card)}
-#m-pdf{align-items:flex-end}
+#m-pdf{align-items:stretch!important}
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:24px;font-size:13px;font-weight:800;opacity:0;transition:all .28s;z-index:999;pointer-events:none;white-space:nowrap;max-width:90%}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.err{background:var(--red)}
@@ -421,7 +418,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
         <div class="flbl">Vehicle Number</div>
         <input class="inp" type="text" id="veh-number" placeholder="e.g. MH12AB1234" autocomplete="off" oninput="this.value=this.value.toUpperCase()"/>
       </div>
-      <!-- Vehicle Photos (multi, square crop) -->
+      <!-- Vehicle Photos multi -->
       <div>
         <div class="flbl">Vehicle Photos <span style="font-weight:500;color:var(--ink3);font-size:11px">(optional, up to 5)</span></div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -429,7 +426,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
           <input type="file" id="veh-photo-input" accept="image/*" capture="environment" multiple style="display:none" onchange="handleVehPhotos(this)"/>
           <button class="btn btn-g btn-xs" onclick="clearAllVehPhotos()" id="veh-photo-clear" style="display:none">✕ Remove All</button>
         </div>
-        <!-- Square photo grid -->
         <div id="veh-photo-grid" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div>
       </div>
     </div>
@@ -532,11 +528,11 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
   <!-- FINAL SUMMARY -->
   <div id="fin-sec" style="display:none">
     <div class="summary">
-      <div class="sum-row"><span class="sum-lbl">Items Total</span><span class="sum-val" id="f-sale">₹0</span></div>
+      <div class="sum-row" id="f-sale-row"><span class="sum-lbl">Items Total</span><span class="sum-val" id="f-sale">₹0</span></div>
       <div class="sum-row" id="f-rr" style="display:none"><span class="sum-lbl" style="color:var(--red)">− Replacements</span><span class="sum-val" style="color:var(--red)" id="f-repl">₹0</span></div>
       <div class="sum-row" id="f-ar" style="display:none"><span class="sum-lbl" style="color:#f9a825">− Advance</span><span class="sum-val" style="color:#f9a825" id="f-adv">₹0</span></div>
       <div class="sum-div"></div>
-      <div class="sum-row big"><span class="sum-lbl">Net to Collect</span><span class="sum-val" id="f-net">₹0</span></div>
+      <div class="sum-row big"><span class="sum-lbl" id="f-net-lbl">Net to Collect</span><span class="sum-val" id="f-net">₹0</span></div>
     </div>
     <div class="collect-card">
       <div class="cc-badge" id="bill-type-badge">💰 Final Amount</div>
@@ -545,7 +541,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
       <div class="cc-val" id="cc-val">₹0</div>
       <div class="cc-note" id="cc-note"></div>
     </div>
-    <!-- Vehicle Photos Preview in bill summary -->
+    <!-- Vehicle Photos in bill summary -->
     <div id="veh-photos-summary" style="display:none;margin-bottom:10px">
       <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ink3);margin-bottom:8px;padding:0 2px">📷 Vehicle Photos</div>
       <div id="veh-photos-summary-grid" style="display:flex;gap:8px;flex-wrap:wrap"></div>
@@ -690,7 +686,38 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
 <!-- TOAST -->
 <div class="toast" id="toast-el"></div>
 
+<!-- BILL TYPE PICKER MODAL -->
+<div class="ov" id="m-billtype">
+  <div class="sheet">
+    <div class="sh-knob"></div>
+    <div class="sh-title">📋 Choose Bill Type</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div onclick="chooseBillType('in')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--abg);border:1.5px solid var(--abrd);border-radius:14px;cursor:pointer" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:48px;height:48px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🏭</div>
+        <div style="flex:1"><div style="font-weight:800;font-size:15px;color:var(--ink)">In-Company Bill</div><div style="font-size:12px;color:var(--ink3);margin-top:2px">Internal / within company sales</div></div>
+        <div style="color:var(--accent);font-size:20px;font-weight:700">›</div>
+      </div>
+      <div onclick="chooseBillType('out')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--rbg);border:1.5px solid var(--rbrd);border-radius:14px;cursor:pointer" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:48px;height:48px;border-radius:13px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🚚</div>
+        <div style="flex:1"><div style="font-weight:800;font-size:15px;color:var(--ink)">Out-Company Bill</div><div style="font-size:12px;color:var(--ink3);margin-top:2px">External / outside company sales</div></div>
+        <div style="color:var(--red);font-size:20px;font-weight:700">›</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PDF PREVIEW MODAL -->
+<!-- Photo Viewer Modal -->
+<div class="ov" id="m-photo" onclick="closeM('m-photo')" style="background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:0">
+  <div style="position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center" onclick="event.stopPropagation()">
+    <button id="photo-prev" onclick="photoNav(-1)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.18);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:10;display:none;align-items:center;justify-content:center">‹</button>
+    <img id="photo-viewer-img" src="" style="max-width:96vw;max-height:88vh;border-radius:10px;object-fit:contain;display:block"/>
+    <button id="photo-next" onclick="photoNav(1)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.18);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:10;display:none;align-items:center;justify-content:center">›</button>
+    <div id="photo-counter" style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.5);color:#fff;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px"></div>
+    <button onclick="closeM('m-photo')" style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:20px;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center">&times;</button>
+  </div>
+</div>
+
 <div class="ov" id="m-pdf">
   <div class="pdf-modal-inner">
     <div class="pdf-modal-header">
@@ -699,12 +726,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
       <button class="btn btn-g btn-xs" onclick="printBillPDF()" style="flex-shrink:0">🖨 Print</button>
     </div>
     <div class="pdf-modal-body" id="pdf-preview"></div>
-    <div class="pdf-modal-footer" style="flex-direction:column;gap:8px">
-      <div style="display:flex;gap:8px;width:100%">
-        <button class="btn btn-a" onclick="printBillPDF()" style="flex:1;justify-content:center;padding:12px;font-size:13px">🖨 Print</button>
-        <button class="btn btn-g" onclick="downloadBillHTML()" style="flex:1;justify-content:center;padding:12px;font-size:13px;background:var(--abg);border-color:var(--abrd);color:var(--accent);font-weight:800">⬇ Download</button>
-      </div>
-      <button class="btn btn-wa" onclick="shareBillHTML()" style="width:100%;justify-content:center;padding:13px;font-size:14px;font-weight:800">📲 Share via WhatsApp</button>
+    <div class="pdf-modal-footer">
+      <button class="btn btn-a" onclick="printBillPDF()" style="flex:1;justify-content:center;padding:13px;font-size:14px">🖨 Print</button>
+      <button class="btn btn-wa" onclick="sharePDFViaWA()" style="flex:1;justify-content:center;padding:13px;font-size:14px">📲 Share on WA</button>
     </div>
   </div>
 </div>
@@ -713,27 +737,19 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-h
 <div class="ov" id="m-billtype">
   <div class="sheet">
     <div class="sh-knob"></div>
-    <div style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:800;color:var(--ink);margin-bottom:6px;text-align:center">📋 New Bill</div>
-    <div style="font-size:12px;color:var(--ink3);font-weight:600;text-align:center;margin-bottom:20px">Choose the type of bill to create</div>
+    <div style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:800;color:var(--ink);margin-bottom:18px;text-align:center">📋 Choose Bill Type</div>
     <div style="display:flex;flex-direction:column;gap:12px">
-      <div onclick="chooseBillType('in')" style="display:flex;align-items:center;gap:16px;padding:18px 16px;background:var(--abg);border:2px solid var(--abrd);border-radius:16px;cursor:pointer;transition:all .15s;-webkit-user-select:none;user-select:none" ontouchstart="this.style.transform='scale(.98)';this.style.opacity='.85'" ontouchend="this.style.transform='';this.style.opacity='1'">
-        <div style="width:52px;height:52px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.15)">🏭</div>
-        <div style="flex:1">
-          <div style="font-weight:800;font-size:15px;color:var(--ink);margin-bottom:3px">In-Company Bill</div>
-          <div style="font-size:12px;color:var(--ink3)">Internal / within company sales</div>
-        </div>
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;flex-shrink:0">›</div>
+      <div onclick="chooseBillType('in')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--abg);border:2px solid var(--abrd);border-radius:14px;cursor:pointer" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:50px;height:50px;border-radius:13px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🏭</div>
+        <div style="flex:1"><div style="font-weight:800;font-size:15px;color:var(--ink)">In-Company Bill</div><div style="font-size:12px;color:var(--ink3);margin-top:3px">Internal / within company sales</div></div>
+        <div style="color:var(--accent);font-size:24px;font-weight:700">›</div>
       </div>
-      <div onclick="chooseBillType('out')" style="display:flex;align-items:center;gap:16px;padding:18px 16px;background:var(--rbg);border:2px solid var(--rbrd);border-radius:16px;cursor:pointer;transition:all .15s;-webkit-user-select:none;user-select:none" ontouchstart="this.style.transform='scale(.98)';this.style.opacity='.85'" ontouchend="this.style.transform='';this.style.opacity='1'">
-        <div style="width:52px;height:52px;border-radius:14px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.15)">🚚</div>
-        <div style="flex:1">
-          <div style="font-weight:800;font-size:15px;color:var(--ink);margin-bottom:3px">Out-Company Bill</div>
-          <div style="font-size:12px;color:var(--ink3)">External / outside company sales</div>
-        </div>
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;flex-shrink:0">›</div>
+      <div onclick="chooseBillType('out')" style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--rbg);border:2px solid var(--rbrd);border-radius:14px;cursor:pointer" ontouchstart="this.style.opacity='.7'" ontouchend="this.style.opacity='1'">
+        <div style="width:50px;height:50px;border-radius:13px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🚚</div>
+        <div style="flex:1"><div style="font-weight:800;font-size:15px;color:var(--ink)">Out-Company Bill</div><div style="font-size:12px;color:var(--ink3);margin-top:3px">External / outside company sales</div></div>
+        <div style="color:var(--red);font-size:24px;font-weight:700">›</div>
       </div>
     </div>
-    <button onclick="closeM('m-billtype')" style="margin-top:16px;width:100%;padding:13px;border:1.5px solid var(--border2);border-radius:12px;background:var(--bg2);color:var(--ink3);font-weight:700;font-size:14px;cursor:pointer;font-family:'Nunito',sans-serif">Cancel</button>
   </div>
 </div>
 
@@ -1085,28 +1101,62 @@ function recalc(){
   $t('r-pv',INR(rT));
   const fs=document.getElementById('fin-sec');
   if(!fs)return;
-  if(sT>0){
+  const replOnly=(sT===0&&rT>0&&replOn);
+  if(sT>0||replOnly){
     fs.style.display='block';
-    $t('f-sale',INR(sT));
+    const frSale=document.getElementById('f-sale-row');
     const frr=document.getElementById('f-rr'),far=document.getElementById('f-ar');
+    if(frSale)frSale.style.display=sT>0?'flex':'none';
+    $t('f-sale',INR(sT));
     if(frr)frr.style.display=rT>0&&replOn?'flex':'none';
     $t('f-repl',INR(rT));
     if(far)far.style.display=adv>0?'flex':'none';
     $t('f-adv',INR(adv));
-    $t('f-net',extra>0?'Extra '+INR(extra):INR(net));
-    if(extra>0){
-      $cl('cc-val','cc-extra');$t('cc-val','Extra '+INR(extra));
-      $t('cc-lbl','Overpaid — Change to Return');
-      $t('cc-note','✓ Bill fully settled · Extra: '+INR(extra));
-    } else if(net===0&&adv>0){
-      $cl('cc-val','cc-val');$t('cc-val',INR(0));
-      $t('cc-lbl','Amount to be Collected After All');
-      $t('cc-note','✅ Fully Paid!');
+    if(replOnly){
+      const toGive=rT-adv;
+      $t('bill-type-badge','🔄 Replacement Only');
+      $t('bill-type-tag','Replacement / Refund Bill');
+      $t('f-net-lbl','Net to Give');
+      const cc=document.querySelector('.collect-card');
+      if(cc)cc.style.background='linear-gradient(135deg,#1565c0,#1976d2,#42a5f5)';
+      if(toGive>0){
+        $cl('cc-val','cc-extra');$t('cc-val',INR(toGive));
+        $t('cc-lbl','Amount to Give to Customer');
+        $t('f-net','Give '+INR(toGive));
+        $t('cc-note','🔄 Customer returned items worth '+INR(rT)+(adv>0?' · Advance ₹'+adv+' already given':''));
+      } else if(toGive===0){
+        $cl('cc-val','cc-val');$t('cc-val','₹0');
+        $t('cc-lbl','Fully Settled via Advance');
+        $t('f-net','₹0 — Settled');
+        $t('cc-note','✅ Advance covered full replacement amount');
+      } else {
+        $cl('cc-val','cc-val');$t('cc-val',INR(Math.abs(toGive)));
+        $t('cc-lbl','Customer Still Owes You');
+        $t('f-net','Collect '+INR(Math.abs(toGive)));
+        $t('cc-note','Advance given was more than replacement value');
+      }
     } else {
-      $cl('cc-val','cc-val');$t('cc-val',INR(net));
-      $t('cc-lbl','Amount to be Collected After All');
-      const notes=[];if(rT>0&&replOn)notes.push('replacements deducted');if(adv>0)notes.push('advance deducted');
-      $t('cc-note',notes.length?'✓ '+notes.join(' · '):'');
+      const isIn=(document.getElementById('bill-type-title')?.textContent||'').includes('In-Company');
+      $t('bill-type-badge',isIn?'🏭 In-Company':'🚚 Out-Company');
+      $t('bill-type-tag',isIn?'Internal Sales':'External Sales');
+      $t('f-net-lbl','Net to Collect');
+      const cc=document.querySelector('.collect-card');
+      if(cc)cc.style.background='';
+      $t('f-net',extra>0?'Extra '+INR(extra):INR(net));
+      if(extra>0){
+        $cl('cc-val','cc-extra');$t('cc-val','Extra '+INR(extra));
+        $t('cc-lbl','Overpaid — Change to Return');
+        $t('cc-note','✓ Bill fully settled · Extra: '+INR(extra));
+      } else if(net===0&&adv>0){
+        $cl('cc-val','cc-val');$t('cc-val',INR(0));
+        $t('cc-lbl','Amount to be Collected After All');
+        $t('cc-note','✅ Fully Paid!');
+      } else {
+        $cl('cc-val','cc-val');$t('cc-val',INR(net));
+        $t('cc-lbl','Amount to be Collected After All');
+        const notes=[];if(rT>0&&replOn)notes.push('replacements deducted');if(adv>0)notes.push('advance deducted');
+        $t('cc-note',notes.length?'✓ '+notes.join(' · '):'');
+      }
     }
   } else {
     fs.style.display='none';
@@ -1185,18 +1235,16 @@ async function pickPartyContact(){
 }
 
 // ── VEHICLE PHOTO ──
-let vehPhotos=[]; // array of base64 strings, max 5
+let vehPhotos=[];
 
 function _cropSquare(dataUrl,cb){
-  // Crop image to square from center using canvas
   var img=new Image();
   img.onload=function(){
     var size=Math.min(img.width,img.height);
-    var sx=(img.width-size)/2, sy=(img.height-size)/2;
+    var sx=(img.width-size)/2,sy=(img.height-size)/2;
     var canvas=document.createElement('canvas');
-    canvas.width=400;canvas.height=400; // output 400x400
-    var ctx=canvas.getContext('2d');
-    ctx.drawImage(img,sx,sy,size,size,0,0,400,400);
+    canvas.width=400;canvas.height=400;
+    canvas.getContext('2d').drawImage(img,sx,sy,size,size,0,0,400,400);
     cb(canvas.toDataURL('image/jpeg',0.85));
   };
   img.src=dataUrl;
@@ -1211,50 +1259,43 @@ function _renderVehPhotoGrid(){
   for(var i=0;i<vehPhotos.length;i++){
     (function(idx,src){
       var wrap=document.createElement('div');
-      wrap.className='vph-wrap';
       wrap.style.cssText='position:relative;width:80px;height:80px;flex-shrink:0;display:inline-block';
       var img=document.createElement('img');
       img.src=src;
-      img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;border:1.5px solid #ddd;display:block';
+      img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;border:1.5px solid #ddd;display:block;cursor:pointer';
+      img.onclick=function(){openPhotoViewer(vehPhotos,idx);};
       var del=document.createElement('button');
-      del.style.cssText='position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;'+
-        'background:#e53935;color:#fff;border:2px solid #fff;font-size:13px;cursor:pointer;'+
-        'font-weight:700;display:flex;align-items:center;justify-content:center;'+
-        'box-shadow:0 1px 5px rgba(0,0,0,.35);padding:0;line-height:1;z-index:10';
+      del.style.cssText='position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#e53935;color:#fff;border:2px solid #fff;font-size:13px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(0,0,0,.35);padding:0;line-height:1;z-index:10';
       del.innerHTML='&times;';
       del.onclick=function(e){e.stopPropagation();vehPhotos.splice(idx,1);_renderVehPhotoGrid();};
-      wrap.appendChild(img);
-      wrap.appendChild(del);
+      wrap.appendChild(img);wrap.appendChild(del);
       grid.appendChild(wrap);
     })(i,vehPhotos[i]);
   }
   if(addBtn)addBtn.style.display=vehPhotos.length>=5?'none':'inline-flex';
   if(clearBtn)clearBtn.style.display=vehPhotos.length>0?'inline-flex':'none';
-  // Also update the summary photos in the bill creation screen
+  // Update bill summary photos
   var sumSec=document.getElementById('veh-photos-summary');
   var sumGrid=document.getElementById('veh-photos-summary-grid');
   if(sumSec&&sumGrid){
     if(vehicleOn&&vehPhotos.length>0){
       sumSec.style.display='block';
       sumGrid.innerHTML='';
-      vehPhotos.forEach(function(src){
-        var img=document.createElement('img');
-        img.src=src;
-        img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;'+
-          'border:1.5px solid var(--border);flex-shrink:0';
-        sumGrid.appendChild(img);
-      });
-    }else{
-      sumSec.style.display='none';
-      sumGrid.innerHTML='';
-    }
+      for(var _si=0;_si<vehPhotos.length;_si++){
+        (function(src,idx){
+          var img=document.createElement('img');
+          img.src=src;
+          img.style.cssText='width:80px;height:80px;object-fit:cover;border-radius:10px;border:1.5px solid var(--border);flex-shrink:0;cursor:pointer';
+          img.onclick=function(){openPhotoViewer(vehPhotos,idx);};
+          sumGrid.appendChild(img);
+        })(vehPhotos[_si],_si);
+      }
+    }else{sumSec.style.display='none';sumGrid.innerHTML='';}
   }
 }
 
 function handleVehPhotos(input){
-  var files=Array.from(input.files||[]);
-  var remaining=5-vehPhotos.length;
-  files=files.slice(0,remaining);
+  var files=Array.from(input.files||[]).slice(0,5-vehPhotos.length);
   if(!files.length)return;
   var loaded=0;
   files.forEach(function(file){
@@ -1263,25 +1304,33 @@ function handleVehPhotos(input){
       _cropSquare(e.target.result,function(cropped){
         vehPhotos.push(cropped);
         loaded++;
-        if(loaded===files.length){
-          _renderVehPhotoGrid();
-          toast(loaded+' photo'+(loaded>1?'s':'')+' added \u2713');
-        }
+        if(loaded===files.length){_renderVehPhotoGrid();toast(loaded+' photo'+(loaded>1?'s':'')+' added \u2713');}
       });
     };
     reader.readAsDataURL(file);
   });
-  input.value=''; // allow re-selecting same file
+  input.value='';
 }
-
-function clearAllVehPhotos(){
-  vehPhotos=[];
-  _renderVehPhotoGrid();
-}
-
-// Legacy alias for any old code
+function clearAllVehPhotos(){vehPhotos=[];_renderVehPhotoGrid();}
 function clearVehPhoto(){clearAllVehPhotos();}
 
+
+// ── PHOTO VIEWER ──
+let _pvPhotos=[],_pvIdx=0;
+function openPhotoViewer(photos,idx){
+  _pvPhotos=photos;_pvIdx=idx||0;_updatePhotoViewer();openM('m-photo');
+}
+function _updatePhotoViewer(){
+  var img=document.getElementById('photo-viewer-img');
+  var ctr=document.getElementById('photo-counter');
+  var prev=document.getElementById('photo-prev');
+  var next=document.getElementById('photo-next');
+  if(img)img.src=_pvPhotos[_pvIdx]||'';
+  if(ctr)ctr.textContent=(_pvIdx+1)+' / '+_pvPhotos.length;
+  if(prev)prev.style.display=_pvPhotos.length>1?'flex':'none';
+  if(next)next.style.display=_pvPhotos.length>1?'flex':'none';
+}
+function photoNav(dir){_pvIdx=(_pvIdx+dir+_pvPhotos.length)%_pvPhotos.length;_updatePhotoViewer();}
 
 // ── DRIVER LIBRARY ──
 function openDriverLib(){
@@ -1464,7 +1513,7 @@ function addAndFetch(){
 function openSave(){
   if(!validateQty())return;
   const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
-  if(sT===0){toast('Add items with price & qty','e');return;}
+  {const _ro2=(sT===0&&replOn&&rRows.reduce((s,r)=>s+rowT(r.id),0)>0);if(sT===0&&!_ro2){toast('Add items or replacement items with price & qty','e');return;}}
   document.getElementById('sname').value=document.getElementById('party-name').value||'';
   openM('m-save');setTimeout(()=>document.getElementById('sname')?.focus(),280);
 }
@@ -1519,12 +1568,11 @@ function renderVehicle(v){
   if(prefs.showPhone&&v.phone)parts.push('📞 '+esc(v.phone));
   if(v.number)parts.push('🔢 '+esc(v.number));
   let html='<div style="font-size:11px;color:var(--ink3);font-weight:600;margin-top:2px">'+parts.join(' · ')+'</div>';
-  // Show photos grid (new multi-photo) or fallback to old single photo
   const photos=v.photos&&v.photos.length?v.photos:(v.photo?[v.photo]:[]);
   if(prefs.showVehiclePhotos&&photos.length){
     html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">';
-    photos.forEach(function(src){
-      html+='<img src="'+src+'" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border);flex-shrink:0" loading="lazy"/>';
+    photos.forEach(function(src,pi){
+      html+='<img src="'+src+'" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border);cursor:pointer" loading="lazy" onclick="openPhotoViewer('+JSON.stringify(photos)+','+pi+')"/>';
     });
     html+='</div>';
   }
@@ -1633,7 +1681,7 @@ function filterBills(){
             <div class="status-badge ${st}">${billStatusIcon(b)} ${billStatusLabel(b)}</div>
           </div>
         </div>
-        ${(()=>{const prefs2=getPrefs();const vp=b.vehicle&&(b.vehicle.photos||b.vehicle.photo);const photos=b.vehicle?.photos?.length?b.vehicle.photos:(b.vehicle?.photo?[b.vehicle.photo]:[]);return prefs2.showVehicle&&prefs2.showVehiclePhotos&&photos.length?`<div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg)"><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:8px">📷 Vehicle Photos</div><div style="display:flex;gap:7px;flex-wrap:wrap">${photos.map(src=>`<img src="${src}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border)" loading="lazy"/>`).join('')}</div></div>`:''})()}
+        ${(()=>{const prefs2=getPrefs();const photos=b.vehicle?.photos?.length?b.vehicle.photos:(b.vehicle?.photo?[b.vehicle.photo]:[]);return prefs2.showVehicle&&prefs2.showVehiclePhotos&&photos.length?`<div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg)"><div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--ink3);margin-bottom:8px">📷 Vehicle Photos</div><div style="display:flex;gap:7px;flex-wrap:wrap">${photos.map((src,pi)=>`<img src="${src}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;border:1.5px solid var(--border);cursor:pointer" loading="lazy" onclick="openPhotoViewer(${JSON.stringify(photos)},${pi})"/>`).join('')}</div></div>`:''})()}
         ${b.billType==='in'?st==='due'?`
         <div style="padding:10px 14px;background:var(--bg2);border-top:1px solid var(--border)">
           <button class="btn-prcv" onclick="openPaymentReceived('${b.id}')">💰 Payment Received</button>
@@ -1752,7 +1800,7 @@ function confirmPayment(){
 function shareCurrentBillWA(){
   if(!validateQty())return;
   const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
-  if(sT===0){toast('Add items first','e');return;}
+  {const _ro3=(sT===0&&replOn&&rRows.reduce((s,r)=>s+rowT(r.id),0)>0);if(sT===0&&!_ro3){toast('Add items first','e');return;}}
   const rT=replOn?rRows.reduce((s,r)=>s+rowT(r.id),0):0;
   const adv=advOn?(parseFloat(document.getElementById('adv-amt').value)||0):0;
   const rawNet=sT-rT-adv;const net=Math.max(0,rawNet);const extra=rawNet<0?Math.abs(rawNet):0;
@@ -1833,155 +1881,102 @@ function buildBillHTML(b,prefs){
   var showRepl=prefs.showReplacements&&rr.length&&b.rT>0;
   var showParty=prefs.showParty&&b.party;
   var showVeh=prefs.showVehicle&&b.vehicle&&(b.vehicle.driver||b.vehicle.number);
-
-  /* ─── status ─── */
   var stLbl,stBg,stClr,stBrd;
   if(st==='paid'){stLbl='PAID';stBg='#e8f5e9';stClr='#2e7d32';stBrd='#a5d6a7';}
   else if(st==='due'){stLbl='DUE';stBg='#ffebee';stClr='#c62828';stBrd='#ef9a9a';}
   else{stLbl='PENDING';stBg='#fff8e1';stClr='#f57f17';stBrd='#ffe082';}
-
-  /* ─── extra / amount to collect ─── */
-  var isExtra=(rem<0);
-  var isSettled=(rem===0);
-  var finalLabel=isExtra?'Extra to Return':isSettled?'Fully Settled':'Amount to Collect';
-  var finalAmt  =isExtra?('\u20b9'+_pn(Math.abs(rem))):('\u20b9'+_pn(Math.max(0,rem)));
-  var finalBg   =isExtra?'#e8f0ff':isSettled?'#e8f5e9':'#fff8f4';
-  var finalClr  =isExtra?'#1565c0':isSettled?'#2e7d32':'#e8722a';
-  var finalIcon =isExtra?'&#8617;':isSettled?'&#10003;':'&#8377;';
+  var replOnly=(b.sT===0&&b.rT>0);
+  var isExtra=(rem<0),isSettled=(rem===0);
+  var finalLabel,finalAmt,finalBg,finalClr;
+  if(replOnly&&rem<0){finalLabel='Amount to Give Customer';finalAmt='\u20b9'+_pn(Math.abs(rem));finalBg='#e8f0ff';finalClr='#1565c0';}
+  else if(replOnly&&rem===0){finalLabel='Settled via Advance';finalAmt='\u20b90';finalBg='#e8f5e9';finalClr='#2e7d32';}
+  else if(isExtra){finalLabel='Extra to Return';finalAmt='\u20b9'+_pn(Math.abs(rem));finalBg='#e8f0ff';finalClr='#1565c0';}
+  else if(isSettled){finalLabel='Fully Settled';finalAmt='\u20b90';finalBg='#e8f5e9';finalClr='#2e7d32';}
+  else{finalLabel='Amount to Collect';finalAmt='\u20b9'+_pn(Math.max(0,rem));finalBg='#fff8f4';finalClr='#e8722a';}
 
   var css=[
     '*{box-sizing:border-box;margin:0;padding:0}',
-    'body{font-family:"Segoe UI",Arial,sans-serif;color:#1e1c18;background:#f7f3ee;',
-         'padding:20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
+    'body{font-family:"Segoe UI",Arial,sans-serif;color:#1e1c18;background:#f7f3ee;padding:20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}',
     '@media print{body{background:#fff;padding:0}}',
-
-    /* Wrapper */
-    '.wrap{background:#fff;border-radius:12px;overflow:hidden;',
-          'box-shadow:0 2px 20px rgba(0,0,0,.10);max-width:680px;margin:0 auto}',
-
-    /* Header */
-    '.hdr{background:linear-gradient(135deg,#b04c14 0%,#e0681e 50%,#f5a048 100%);',
-          'color:#fff;padding:24px 28px 20px;position:relative;overflow:hidden}',
-    '.hdr::after{content:"";position:absolute;top:-40px;right:-30px;width:160px;height:160px;',
-                'border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}',
-    '.hdr::before{content:"";position:absolute;bottom:-50px;left:-20px;width:120px;height:120px;',
-                 'border-radius:50%;background:rgba(0,0,0,.06);pointer-events:none}',
+    '.wrap{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.10);max-width:680px;margin:0 auto}',
+    '.hdr{background:linear-gradient(135deg,#b04c14 0%,#e0681e 50%,#f5a048 100%);color:#fff;padding:24px 28px 20px;position:relative;overflow:hidden}',
+    '.hdr::after{content:"";position:absolute;top:-40px;right:-30px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}',
     '.hdr-inner{position:relative;display:flex;justify-content:space-between;align-items:flex-start}',
-    '.hdr-left{}',
-    '.co-name{font-size:20px;font-weight:800;letter-spacing:-.3px;text-shadow:0 1px 2px rgba(0,0,0,.15)}',
+    '.co-name{font-size:20px;font-weight:800;letter-spacing:-.3px}',
     '.co-tagline{font-size:10px;opacity:.75;letter-spacing:1.2px;text-transform:uppercase;margin-top:3px}',
     '.co-phones{font-size:11px;margin-top:8px;opacity:.9;font-weight:600}',
     '.hdr-right{text-align:right}',
     '.inv-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.7}',
     '.inv-num{font-size:18px;font-weight:800;letter-spacing:.3px;margin-top:1px}',
     '.inv-date{font-size:11px;opacity:.85;margin-top:3px}',
-    '.inv-type{font-size:9px;background:rgba(255,255,255,.2);padding:3px 9px;',
-               'border-radius:20px;margin-top:5px;display:inline-block;',
-               'letter-spacing:.8px;text-transform:uppercase;font-weight:700}',
-
-    /* Status bar */
-    '.status-bar{display:flex;align-items:center;justify-content:space-between;',
-                'padding:8px 28px;background:#fff7f0;border-bottom:2px solid #f0ece5}',
-    '.sb-left{display:flex;align-items:center;gap:8px;font-size:11px;color:#6b6560;font-weight:500}',
-    '.status-chip{padding:3px 12px;border-radius:20px;font-size:10px;font-weight:800;',
-                 'text-transform:uppercase;letter-spacing:1px;border:1.5px solid}',
-
-    /* Meta strip */
+    '.inv-type{font-size:9px;background:rgba(255,255,255,.2);padding:3px 9px;border-radius:20px;margin-top:5px;display:inline-block;letter-spacing:.8px;text-transform:uppercase;font-weight:700}',
+    '.status-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 28px;background:#fff7f0;border-bottom:2px solid #f0ece5}',
+    '.status-chip{padding:3px 12px;border-radius:20px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;border:1.5px solid}',
     '.meta{display:flex;background:#faf8f5;border-bottom:1.5px solid #ede9e2}',
     '.mi{flex:1;padding:10px 16px;border-right:1px solid #ede9e2}',
     '.mi:last-child{border-right:none}',
     '.ml{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#a09a92;margin-bottom:3px}',
     '.mv{font-size:11px;font-weight:700;color:#1e1c18}',
-
-    /* Party / vehicle */
     '.party-sec{padding:12px 24px;background:#fdf9f5;border-bottom:1px solid #ede9e2;display:flex;gap:32px;flex-wrap:wrap}',
-    '.p-grp{}',
     '.p-lbl{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#a09a92;margin-bottom:2px}',
     '.p-val{font-size:12px;font-weight:700;color:#1e1c18}',
     '.p-sub{font-size:10.5px;color:#6b6560;margin-top:2px;font-weight:500}',
-
-    /* Section heading */
-    '.sec-hd{padding:14px 24px 6px;font-size:9px;font-weight:800;text-transform:uppercase;',
-            'letter-spacing:1.5px;color:#a09a92;display:flex;align-items:center;gap:6px}',
+    '.sec-hd{padding:14px 24px 6px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#a09a92;display:flex;align-items:center;gap:6px}',
     '.sec-hd span{flex:1;height:1px;background:#ede9e2;margin-left:6px}',
     '.sec-hd.red{color:#c62828}',
-
-    /* Tables */
     '.tbl{padding:0 24px 4px}',
     'table{width:100%;border-collapse:collapse}',
-    'thead th{background:#2d2520;color:#fff;font-size:9px;font-weight:700;',
-             'text-transform:uppercase;letter-spacing:.6px;padding:9px 10px;text-align:left}',
-    'thead th.r{text-align:right}',
-    'thead th.c{text-align:center;width:30px}',
+    'thead th{background:#2d2520;color:#fff;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:9px 10px;text-align:left}',
+    'thead th.r{text-align:right}thead th.c{text-align:center;width:30px}',
     'tbody tr:nth-child(odd){background:#fff}',
     'tbody tr:nth-child(even){background:#faf8f5}',
     'td{font-size:11px;padding:8px 10px;color:#2a2420;border-bottom:1px solid #f2ede8;vertical-align:middle}',
-    'td.r{text-align:right;font-weight:600}',
-    'td.c{text-align:center;color:#c0bab5;font-size:10px}',
-    '.tfoot td{background:#fff4ec;color:#c45e1a;font-weight:800;font-size:11.5px;',
-              'border-top:2px solid #f0d5c0;border-bottom:2px solid #f0d5c0;padding:9px 10px}',
-    '.rfoot td{background:#fff2f2;color:#c62828;font-weight:800;font-size:11.5px;',
-              'border-top:2px solid #f5c5c5;border-bottom:2px solid #f5c5c5;padding:9px 10px}',
-
-    /* Summary */
+    'td.r{text-align:right;font-weight:600}td.c{text-align:center;color:#c0bab5;font-size:10px}',
+    '.tfoot td{background:#fff4ec;color:#c45e1a;font-weight:800;font-size:11.5px;border-top:2px solid #f0d5c0;border-bottom:2px solid #f0d5c0;padding:9px 10px}',
+    '.rfoot td{background:#fff2f2;color:#c62828;font-weight:800;font-size:11.5px;border-top:2px solid #f5c5c5;border-bottom:2px solid #f5c5c5;padding:9px 10px}',
     '.sum-outer{padding:16px 24px 0;display:flex;justify-content:flex-end}',
-    '.sum-box{width:54%;border:1.5px solid #ede9e2;border-radius:10px;overflow:hidden;',
-             'box-shadow:0 1px 6px rgba(0,0,0,.06)}',
-    '.sr{display:flex;justify-content:space-between;align-items:center;',
-        'padding:8px 14px;border-bottom:1px solid #f2ede8;font-size:11px}',
+    '.sum-box{width:54%;border:1.5px solid #ede9e2;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.06)}',
+    '.sr{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid #f2ede8;font-size:11px}',
     '.sr:last-child{border-bottom:none}',
     '.sr-lbl{color:#6b6560}.sr-val{font-weight:700;color:#1e1c18}',
     '.sr.red .sr-lbl{color:#c62828}.sr.red .sr-val{color:#c62828}',
     '.sr.org .sr-lbl{color:#c45e1a}.sr.org .sr-val{color:#c45e1a}',
     '.sr.grn .sr-lbl{color:#2e7d32}.sr.grn .sr-val{color:#2e7d32}',
     '.sr-final{display:flex;justify-content:space-between;align-items:center;padding:12px 14px}',
-    '.sf-lbl{font-size:12px;font-weight:700}',
-    '.sf-val{font-size:17px;font-weight:800;letter-spacing:-.3px}',
-
-    /* Payment history */
+    '.sf-lbl{font-size:12px;font-weight:700}.sf-val{font-size:17px;font-weight:800;letter-spacing:-.3px}',
     '.ph-outer{padding:4px 24px 0}',
-    '.ph-row{display:flex;justify-content:space-between;align-items:center;',
-            'padding:8px 0;border-bottom:1px solid #f2ede8;font-size:11px}',
+    '.ph-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f2ede8;font-size:11px}',
     '.ph-row:last-child{border-bottom:none}',
-    '.ph-who{font-weight:700;color:#1e1c18}',
-    '.ph-dt{font-size:9px;color:#a09a92;margin-top:1px}',
-    '.ph-amt{font-size:13px;font-weight:800;color:#2e7d32}',
-
-    /* Footer */
-    '.foot{margin:20px 24px 24px;padding-top:14px;border-top:1.5px solid #ede9e2;',
-           'display:flex;justify-content:space-between;align-items:center}',
-    '.foot-l{font-size:10px;color:#a09a92}',
-    '.foot-l strong{color:#e0681e;font-size:11px}',
-    '.foot-r{font-size:9px;color:#c8c2ba;text-align:right}'
+    '.ph-who{font-weight:700;color:#1e1c18}.ph-dt{font-size:9px;color:#a09a92;margin-top:1px}.ph-amt{font-size:13px;font-weight:800;color:#2e7d32}',
+    '.foot{margin:20px 24px 24px;padding-top:14px;border-top:1.5px solid #ede9e2;display:flex;justify-content:space-between;align-items:center}',
+    '.foot-l{font-size:10px;color:#a09a92}.foot-l strong{color:#e0681e;font-size:11px}',
+    '.foot-r{font-size:9px;color:#c8c2ba;text-align:right}',
+    '.print-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #f0d5c0;padding:12px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 -4px 20px rgba(0,0,0,.12);z-index:9999}',
+    '.print-btn{background:linear-gradient(135deg,#b04c14,#e0681e);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:"Segoe UI",Arial,sans-serif;box-shadow:0 2px 10px rgba(180,76,20,.4);flex-shrink:0}',
+    '.print-hint{font-size:11px;color:#a09a92;line-height:1.5}',
+    '@media print{.print-bar{display:none!important}body{padding-bottom:0!important}}'
   ].join('');
 
-  var H='<!DOCTYPE html><html><head><meta charset="UTF-8"/>'+
+  var H='<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>'+
     '<style>'+css+'</style></head><body><div class="wrap">';
 
-  /* ── HEADER ── */
   H+='<div class="hdr"><div class="hdr-inner">'+
-     '<div class="hdr-left">'+
-       '<div class="co-name">Jai Bhawani Industries</div>'+
-       '<div class="co-tagline">Jai Mata Di</div>'+
-       (ph.length?'<div class="co-phones">'+ph.map(function(p){return '&#9990; '+p;}).join('&nbsp;&nbsp;&middot;&nbsp;&nbsp;')+'</div>':'')+
+     '<div><div class="co-name">Jai Bhawani Industries</div>'+
+     '<div class="co-tagline">Jai Mata Di</div>'+
+     (ph.length?'<div class="co-phones">'+ph.map(function(p){return '&#9990; '+p;}).join('&nbsp;&nbsp;&middot;&nbsp;&nbsp;')+'</div>':'')+
      '</div>'+
-     '<div class="hdr-right">'+
-       '<div class="inv-lbl">Invoice</div>'+
-       '<div class="inv-num">'+(b.billId||b.id||'&mdash;')+'</div>'+
-       '<div class="inv-date">'+(b.date||'&mdash;')+'</div>'+
-       '<div class="inv-type">'+(b.billType==='in'?'In-Company':'Out-Company')+'</div>'+
-     '</div>'+
-     '</div></div>';
+     '<div class="hdr-right"><div class="inv-lbl">Invoice</div>'+
+     '<div class="inv-num">'+(b.billId||b.id||'&mdash;')+'</div>'+
+     '<div class="inv-date">'+(b.date||'&mdash;')+'</div>'+
+     '<div class="inv-type">'+(b.billType==='in'?'In-Company':'Out-Company')+'</div>'+
+     '</div></div></div>';
 
-  /* ── STATUS BAR ── */
   H+='<div class="status-bar">'+
-     '<div class="sb-left">'+
-       '<div class="status-chip" style="background:'+stBg+';color:'+stClr+';border-color:'+stBrd+'">'+stLbl+'</div>'+
-       (b.name?'<span style="font-weight:700;color:#1e1c18">'+b.name+'</span>':'')+'</div>'+
-     '<div style="font-size:10px;color:#a09a92;font-weight:600">'+(b.date||'')+'</div>'+
-     '</div>';
+     '<div style="display:flex;align-items:center;gap:8px">'+
+     '<div class="status-chip" style="background:'+stBg+';color:'+stClr+';border-color:'+stBrd+'">'+stLbl+'</div>'+
+     (b.name?'<span style="font-weight:700;color:#1e1c18;font-size:11px">'+b.name+'</span>':'')+'</div>'+
+     '<div style="font-size:10px;color:#a09a92;font-weight:600">'+(b.date||'')+'</div></div>';
 
-  /* ── META ── */
   H+='<div class="meta">'+
      '<div class="mi"><div class="ml">Bill No.</div><div class="mv" style="color:#e0681e">'+(b.billId||'&mdash;')+'</div></div>'+
      '<div class="mi"><div class="ml">Bill Name</div><div class="mv">'+(b.name||'&mdash;')+'</div></div>'+
@@ -1989,139 +1984,73 @@ function buildBillHTML(b,prefs){
      '<div class="mi"><div class="ml">Type</div><div class="mv">'+(b.billType==='in'?'In-Company':'Out-Company')+'</div></div>'+
      '</div>';
 
-  /* ── PARTY / VEHICLE ── */
   if(showParty||showVeh){
     H+='<div class="party-sec">';
-    if(showParty){H+='<div class="p-grp"><div class="p-lbl">Party / Customer</div>'+
-      '<div class="p-val">'+b.party+'</div>';if(prefs.showPhone&&b.partyPhone)H+='<div class="p-sub">'+b.partyPhone+'</div>';H+='</div>';}
-    if(showVeh){var v=b.vehicle;
-      H+='<div class="p-grp"><div class="p-lbl">Driver / Vehicle</div>'+
-        '<div class="p-val">'+(v.driver||'')+(v.number?' &nbsp;&middot;&nbsp; '+v.number:'')+'</div>';if(prefs.showPhone&&v.phone)H+='<div class="p-sub">'+v.phone+'</div>';H+='</div>';}
+    if(showParty){H+='<div><div class="p-lbl">Party / Customer</div><div class="p-val">'+b.party+'</div>';if(prefs.showPhone&&b.partyPhone)H+='<div class="p-sub">'+b.partyPhone+'</div>';H+='</div>';}
+    if(showVeh){var v=b.vehicle;H+='<div><div class="p-lbl">Driver / Vehicle</div><div class="p-val">'+(v.driver||'')+(v.number?' &nbsp;&middot;&nbsp; '+v.number:'')+'</div>';if(prefs.showPhone&&v.phone)H+='<div class="p-sub">'+v.phone+'</div>';H+='</div>';}
     H+='</div>';
   }
 
-  /* ── ITEMS SOLD ── */
+  if(replOnly&&!sr.length){
+    H+='<div style="margin:16px 24px 0;background:#fff2f2;border:1.5px solid #fecaca;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px">'+
+       '<span style="font-size:20px">&#128260;</span>'+
+       '<div><div style="font-size:12px;font-weight:800;color:#c62828">Replacement Only Bill</div>'+
+       '<div style="font-size:10px;color:#6b6560;margin-top:2px">No items sold &mdash; customer returned goods for replacement/refund</div></div></div>';
+  }
+
   if(sr.length){
-    H+='<div class="sec-hd">Items Sold<span></span></div>'+
-       '<div class="tbl"><table>'+
-       '<thead><tr>'+
-       '<th class="c">#</th>'+
-       '<th>Item</th>'+
-       '<th class="r" style="width:80px">&#8377;/pc</th>'+
-       '<th class="r" style="width:60px">Qty</th>'+
-       '<th class="r" style="width:90px">Total</th>'+
-       '</tr></thead><tbody>';
+    H+='<div class="sec-hd">Items Sold<span></span></div><div class="tbl"><table>'+
+       '<thead><tr><th class="c">#</th><th>Item</th><th class="r" style="width:80px">&#8377;/pc</th><th class="r" style="width:60px">Qty</th><th class="r" style="width:90px">Total</th></tr></thead><tbody>';
     sr.forEach(function(row){
-      H+='<tr>'+
-         '<td class="c">'+row[0]+'</td>'+
-         '<td>'+row[1]+'</td>'+
-         '<td class="r">&#8377;'+_pn(row[2])+'</td>'+
-         '<td class="r">'+row[3]+'</td>'+
-         '<td class="r">&#8377;'+_pn(row[4])+'</td>'+
-         '</tr>';
+      H+='<tr><td class="c">'+row[0]+'</td><td>'+row[1]+'</td><td class="r">&#8377;'+_pn(row[2])+'</td><td class="r">'+row[3]+'</td><td class="r">&#8377;'+_pn(row[4])+'</td></tr>';
     });
-    H+='<tr class="tfoot">'+
-       '<td></td><td colspan="3">Items Total</td>'+
-       '<td class="r">&#8377;'+_pn(b.sT)+'</td>'+
-       '</tr>';
+    H+='<tr class="tfoot"><td></td><td colspan="3">Items Total</td><td class="r">&#8377;'+_pn(b.sT)+'</td></tr>';
     H+='</tbody></table></div>';
   }
 
-  /* ── REPLACEMENTS ── */
   if(showRepl){
-    H+='<div class="sec-hd red">Replacements Deducted<span></span></div>'+
-       '<div class="tbl"><table>'+
-       '<thead><tr style="background:#5c1a1a">'+
-       '<th class="c">#</th>'+
-       '<th>Item</th>'+
-       '<th class="r" style="width:80px">&#8377;/pc</th>'+
-       '<th class="r" style="width:60px">Qty</th>'+
-       '<th class="r" style="width:90px">Deducted</th>'+
-       '</tr></thead><tbody>';
+    H+='<div class="sec-hd red">Replacements Deducted<span></span></div><div class="tbl"><table>'+
+       '<thead><tr style="background:#5c1a1a"><th class="c">#</th><th>Item</th><th class="r" style="width:80px">&#8377;/pc</th><th class="r" style="width:60px">Qty</th><th class="r" style="width:90px">Deducted</th></tr></thead><tbody>';
     rr.forEach(function(row){
-      H+='<tr>'+
-         '<td class="c">'+row[0]+'</td>'+
-         '<td style="color:#c62828">'+row[1]+'</td>'+
-         '<td class="r" style="color:#c62828">&#8377;'+_pn(row[2])+'</td>'+
-         '<td class="r" style="color:#c62828">'+row[3]+'</td>'+
-         '<td class="r" style="color:#c62828">&minus;&#8377;'+_pn(row[4])+'</td>'+
-         '</tr>';
+      H+='<tr><td class="c">'+row[0]+'</td><td style="color:#c62828">'+row[1]+'</td><td class="r" style="color:#c62828">&#8377;'+_pn(row[2])+'</td><td class="r" style="color:#c62828">'+row[3]+'</td><td class="r" style="color:#c62828">&minus;&#8377;'+_pn(row[4])+'</td></tr>';
     });
-    H+='<tr class="rfoot">'+
-       '<td></td><td colspan="3">Total Deducted</td>'+
-       '<td class="r">&minus;&#8377;'+_pn(b.rT)+'</td>'+
-       '</tr>';
+    H+='<tr class="rfoot"><td></td><td colspan="3">Total Deducted</td><td class="r">&minus;&#8377;'+_pn(b.rT)+'</td></tr>';
     H+='</tbody></table></div>';
   }
 
-  /* ── SUMMARY ── */
   H+='<div class="sum-outer"><div class="sum-box">';
   if(b.sT>0)H+='<div class="sr"><span class="sr-lbl">Items Total</span><span class="sr-val">&#8377;'+_pn(b.sT)+'</span></div>';
   if(b.rT>0)H+='<div class="sr red"><span class="sr-lbl">&minus; Replacements</span><span class="sr-val">&minus;&#8377;'+_pn(b.rT)+'</span></div>';
   if(b.adv>0)H+='<div class="sr org"><span class="sr-lbl">&minus; Advance ('+(b.payMode==='upi'?'UPI':'Cash')+(prefs.showReceiver&&b.upiReceivedBy?' &middot; '+b.upiReceivedBy:'')+')</span><span class="sr-val">&minus;&#8377;'+_pn(b.adv)+'</span></div>';
   if(paid>0)H+='<div class="sr grn"><span class="sr-lbl">&minus; Payments Received</span><span class="sr-val">&minus;&#8377;'+_pn(paid)+'</span></div>';
-  /* FINAL ROW — handles collect / settled / extra */
-  H+='<div class="sr-final" style="background:'+finalBg+'">'+
-     '<span class="sf-lbl" style="color:'+finalClr+'">'+finalLabel+'</span>'+
-     '<span class="sf-val" style="color:'+finalClr+'">'+finalAmt+'</span>'+
-     '</div>';
+  H+='<div class="sr-final" style="background:'+finalBg+'"><span class="sf-lbl" style="color:'+finalClr+'">'+finalLabel+'</span><span class="sf-val" style="color:'+finalClr+'">'+finalAmt+'</span></div>';
   H+='</div></div>';
 
-  /* ── PAYMENT HISTORY ── */
   if(b.payLog&&b.payLog.length){
-    H+='<div class="sec-hd">Payment History<span></span></div>'+
-       '<div class="ph-outer">';
+    H+='<div class="sec-hd">Payment History<span></span></div><div class="ph-outer">';
     b.payLog.forEach(function(p){
-      H+='<div class="ph-row">'+
-         '<div><div class="ph-who">'+(p.who||'Unknown')+(p.phone?' &nbsp;&middot;&nbsp; '+p.phone:'')+'</div>'+
-         '<div class="ph-dt">'+p.date+(p.note?' &mdash; '+p.note:'')+'</div></div>'+
-         '<div class="ph-amt">+&#8377;'+_pn(p.amount)+'</div>'+
-         '</div>';
+      H+='<div class="ph-row"><div><div class="ph-who">'+(p.who||'Unknown')+(p.phone?' &nbsp;&middot;&nbsp; '+p.phone:'')+'</div><div class="ph-dt">'+p.date+(p.note?' &mdash; '+p.note:'')+'</div></div><div class="ph-amt">+&#8377;'+_pn(p.amount)+'</div></div>';
     });
     H+='</div>';
   }
 
-  /* ── VEHICLE PHOTOS ── */
-  var photos=b.vehicle&&b.vehicle.photos&&b.vehicle.photos.length?b.vehicle.photos:
-             (b.vehicle&&b.vehicle.photo?[b.vehicle.photo]:[]);
+  var photos=b.vehicle&&b.vehicle.photos&&b.vehicle.photos.length?b.vehicle.photos:(b.vehicle&&b.vehicle.photo?[b.vehicle.photo]:[]);
   if(prefs.showVehicle&&prefs.showVehiclePhotos&&photos.length){
     H+='<div class="sec-hd">Vehicle Photos<span></span></div>'+
        '<div style="padding:0 24px 16px;display:flex;gap:10px;flex-wrap:wrap">';
-    photos.forEach(function(src){
-      H+='<img src="'+src+'" style="width:110px;height:110px;object-fit:cover;'+
-         'border-radius:10px;border:1.5px solid #e8e3d9;"/>';
-    });
+    photos.forEach(function(src){H+='<img src="'+src+'" style="width:110px;height:110px;object-fit:cover;border-radius:10px;border:1.5px solid #e8e3d9;"/>';});
     H+='</div>';
   }
 
-  /* ── FOOTER ── */
-  H+='<div class="foot">'+
-     '<div class="foot-l">'+
-       '<strong>Jai Bhawani Industries</strong> &mdash; Jai Mata Di'+(ph.length?'<br/>'+ph.join(' &middot; '):'')+
-     '</div>'+
-     '<div class="foot-r">'+
-       'Jai Bhawani Bills App'+(b.billId?'<br/>'+b.billId:'')+
-     '</div>'+
-     '</div>';
+  H+='<div class="foot"><div class="foot-l"><strong>Jai Bhawani Industries</strong> &mdash; Jai Mata Di'+(ph.length?'<br/>'+ph.join(' &middot; '):'')+' </div>'+
+     '<div class="foot-r">Jai Bhawani Bills App'+(b.billId?'<br/>'+b.billId:'')+'</div></div>';
 
-  H+=
+  H+='</div>'+
     '<div class="print-bar">'+
     '<button onclick="window.print()" class="print-btn">&#128424; Print / Save as PDF</button>'+
     '<div class="print-hint">Open in browser &rarr; Tap this button &rarr; Choose "Save as PDF"</div>'+
     '</div>'+
-    '<style>'+
-    '.print-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;'+
-               'border-top:2px solid #f0d5c0;padding:12px 20px;display:flex;'+
-               'align-items:center;gap:14px;box-shadow:0 -4px 20px rgba(0,0,0,.12);z-index:9999}'+
-    '.print-btn{background:linear-gradient(135deg,#b04c14,#e0681e);color:#fff;border:none;'+
-               'padding:12px 28px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;'+
-               'font-family:"Segoe UI",Arial,sans-serif;box-shadow:0 2px 10px rgba(180,76,20,.4);'+
-               'flex-shrink:0;letter-spacing:.2px}'+
-    '.print-btn:active{transform:scale(.97);opacity:.9}'+
-    '.print-hint{font-size:11px;color:#a09a92;line-height:1.5}'+
-    '@media print{.print-bar{display:none!important}body{padding-bottom:0!important}}'+
-    '</style>'+
-    '</div></body></html>';
+    '</body></html>';
   return H;
 }
 
@@ -2131,7 +2060,6 @@ function _showPDF(b){
   var html=buildBillHTML(b,prefs);
   var preview=document.getElementById('pdf-preview');
   if(!preview)return;
-  // Use iframe so bill CSS is isolated from app styles
   preview.innerHTML='';
   preview.style.height='auto';
   preview.style.background='#f1f5f9';
@@ -2140,12 +2068,8 @@ function _showPDF(b){
   iframe.style.cssText='width:100%;height:600px;border:none;display:block;background:#f1f5f9';
   preview.appendChild(iframe);
   iframe.srcdoc=html;
-  // Resize iframe to full bill height after load
   iframe.onload=function(){
-    try{
-      var h=iframe.contentDocument.documentElement.scrollHeight;
-      iframe.style.height=Math.max(h,300)+'px';
-    }catch(e){}
+    try{var h=iframe.contentDocument.documentElement.scrollHeight;iframe.style.height=Math.max(h,300)+'px';}catch(e){}
   };
   openM('m-pdf');
 }
@@ -2158,7 +2082,7 @@ function openBillPDF(billId){
 function openCurrentBillPDF(){
   if(!validateQty())return;
   const sT=sRows.reduce((s,r)=>s+rowT(r.id),0);
-  if(sT===0){toast('Add items first','e');return;}
+  {const _ro3=(sT===0&&replOn&&rRows.reduce((s,r)=>s+rowT(r.id),0)>0);if(sT===0&&!_ro3){toast('Add items first','e');return;}}
   const rT=replOn?rRows.reduce((s,r)=>s+rowT(r.id),0):0;
   const adv=advOn?(parseFloat(document.getElementById('adv-amt').value)||0):0;
   const rawNet=sT-rT-adv;const net=Math.max(0,rawNet);
@@ -2183,260 +2107,50 @@ function printBillPDF(){
   win.document.write(html);win.document.close();
   setTimeout(()=>{win.focus();win.print();},600);
 }
-// ── PDF FILE GENERATION & SHARE ──
-function _buildPDFFilename(b){
-  const id=(b.billId||b.id||'bill').replace(/[^a-zA-Z0-9-]/g,'');
-  const name=(b.name||'bill').replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'-');
-  return 'JBI-'+id+'-'+name+'.pdf';
-}
-
-// ── Bill share: HTML file download + WhatsApp share ──
-
-function _buildFilename(b, ext){
-  var id=(b.billId||b.id||'bill').replace(/[^a-zA-Z0-9-]/g,'');
-  var name=(b.name||'bill').replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'-')||'bill';
-  return 'JBI-'+id+'-'+name+'.'+ext;
-}
-
-function downloadBillHTML(){
-  if(!_pdfBillData){toast('No bill loaded','e');return;}
-  var b=_pdfBillData;
-  var html=buildBillHTML(b,getPrefs());
-  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download=_buildFilename(b,'html');
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(function(){URL.revokeObjectURL(url);a.remove();},2000);
-  toast('Downloaded! Open in browser \u2192 Print \u2192 Save as PDF \u2713');
-}
-
-async function shareBillHTML(){
-  if(!_pdfBillData)return;
-  var b=_pdfBillData;
-  var prefs=getPrefs();
-  var html=buildBillHTML(b,prefs);
-  var filename=_buildFilename(b,'html');
-  var blob=new Blob([html],{type:'text/html'});
-
-  // Try native file share (Android Chrome / iOS Safari)
-  if(navigator.share&&navigator.canShare){
-    var file=new File([blob],filename,{type:'text/html'});
-    if(navigator.canShare({files:[file]})){
-      try{
-        await navigator.share({
-          title:'Bill - Jai Bhawani Industries',
-          files:[file]
-        });
-        toast('Bill shared \u2713');
-        closeM('m-pdf');
-      }catch(err){
-        if(err.name!=='AbortError') _shareViaWAText(b,prefs);
-      }
-      return;
-    }
-  }
-
-  // Fallback: WhatsApp text message
-  _shareViaWAText(b,prefs);
-}
-
-
-// _setBtnState removed - no longer needed
-
-function _downloadBlob(blob,filename){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url; a.download=filename;
-  document.body.appendChild(a); a.click();
-  setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},3000);
-}
-
-function downloadPDF(){downloadBillHTML();}
-
-function printBillPDF(){
-  if(!_pdfBillData)return;
-  const html=buildBillHTML(_pdfBillData,getPrefs());
-  const win=window.open('','_blank');
-  if(!win){toast('Allow pop-ups and try again','e');return;}
-  win.document.write(html);win.document.close();
-  setTimeout(()=>{win.focus();win.print();},600);
-}
-// ── PDF FILE GENERATION & SHARE ──
-function _buildPDFFilename(b){
-  const id=(b.billId||b.id||'bill').replace(/[^a-zA-Z0-9-]/g,'');
-  const name=(b.name||'bill').replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'-');
-  return 'JBI-'+id+'-'+name+'.pdf';
-}
-
-// ── Bill share: HTML file download + WhatsApp share ──
-
-function _buildFilename(b, ext){
-  var id=(b.billId||b.id||'bill').replace(/[^a-zA-Z0-9-]/g,'');
-  var name=(b.name||'bill').replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'-')||'bill';
-  return 'JBI-'+id+'-'+name+'.'+ext;
-}
-
-function downloadBillHTML(){
-  if(!_pdfBillData){toast('No bill loaded','e');return;}
-  var b=_pdfBillData;
-  var html=buildBillHTML(b,getPrefs());
-  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download=_buildFilename(b,'html');
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(function(){URL.revokeObjectURL(url);a.remove();},2000);
-  toast('Downloaded! Open in browser \u2192 Print \u2192 Save as PDF \u2713');
-}
-
-async function shareBillHTML(){
-  if(!_pdfBillData)return;
-  var b=_pdfBillData;
-  var prefs=getPrefs();
-  var html=buildBillHTML(b,prefs);
-  var filename=_buildFilename(b,'html');
-  var blob=new Blob([html],{type:'text/html'});
-
-  // Try native file share (Android Chrome / iOS Safari)
-  if(navigator.share&&navigator.canShare){
-    var file=new File([blob],filename,{type:'text/html'});
-    if(navigator.canShare({files:[file]})){
-      try{
-        await navigator.share({
-          title:'Bill - Jai Bhawani Industries',
-          files:[file]
-        });
-        toast('Bill shared \u2713');
-        closeM('m-pdf');
-      }catch(err){
-        if(err.name!=='AbortError') _shareViaWAText(b,prefs);
-      }
-      return;
-    }
-  }
-
-  // Fallback: WhatsApp text message
-  _shareViaWAText(b,prefs);
-}
-
-
-// _setBtnState removed - no longer needed
-
-function _downloadBlob(blob,filename){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url; a.download=filename;
-  document.body.appendChild(a); a.click();
-  setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},3000);
-}
-
-async function downloadPDF(){
-  if(!_pdfBillData){toast('No bill loaded','e');return;}
-  _setBtnState('btn-dl-pdf',true);
-  toast('Generating PDF\u2026');
-  try{
-    const blob=await _generateRealPDF(_pdfBillData);
-    _downloadBlob(blob,_buildPDFFilename(_pdfBillData));
-    toast('PDF downloaded \u2713');
-  }catch(e){
-    console.error('PDF error:',e);
-    // Fallback: open print window
-    toast('Tip: use Print \u2192 Save as PDF');
-    printBillPDF();
-  }finally{
-    _setBtnState('btn-dl-pdf',false,'⬇ Download PDF');
-  }
-}
-
-async function shareAsPDF(){
+function sharePDFViaWA(){
   if(!_pdfBillData)return;
   const b=_pdfBillData;
   const prefs=getPrefs();
-  _setBtnState('btn-share-pdf',true);
-  toast('Generating PDF\u2026');
-  try{
-    const blob=await _generateRealPDF(b);
-    const filename=_buildPDFFilename(b);
-    const file=new File([blob],filename,{type:'application/pdf'});
-
-    // Try Web Share API with actual PDF file
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-      _setBtnState('btn-share-pdf',false,'📲 Share PDF via WhatsApp');
-      await navigator.share({
-        title:'Bill \u2014 Jai Bhawani Industries',
-        text:'\uD83D\uDE4F Bill from Jai Bhawani Industries',
-        files:[file]
-      });
-      closeM('m-pdf');
-      toast('PDF shared \u2713');
-      return;
-    }
-
-    // Fallback 1: download the PDF + open WA
-    _downloadBlob(blob,filename);
-    toast('PDF saved! Now sharing on WhatsApp\u2026');
-    setTimeout(()=>_shareViaWAText(b,prefs),1200);
-
-  }catch(e){
-    if(e.name==='AbortError'){toast('Share cancelled');}
-    else{
-      console.error('Share error:',e);
-      _shareViaWAText(b,prefs);
-    }
-  }finally{
-    _setBtnState('btn-share-pdf',false,'📲 Share PDF via WhatsApp');
-  }
-}
-
-function printBillPDF(){
-  if(!_pdfBillData)return;
-  const html=buildBillHTML(_pdfBillData,getPrefs());
-  const win=window.open('','_blank');
-  if(!win){toast('Allow pop-ups to print','e');return;}
-  win.document.write(html);win.document.close();
-  setTimeout(()=>{win.focus();win.print();},700);
-}
-
-function _shareViaWAText(b,prefs){
   const ci=getCompanyInfo();
   const ph=[ci.phone1,ci.phone2].filter(Boolean);
   const rem=billRemainingDue(b);
   const NL='\n';
-  const D='\u2501'.repeat(20);
+  const D='\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501';
   let m='\uD83D\uDE4F *Jai Bhawani Industries*'+NL;
-  if(ph.length)m+=ph.map(p=>'\uD83D\uDCDE '+p).join('  \u00B7  ')+NL;
+  if(ph.length)m+=ph.map(function(p){return '\uD83D\uDCDE '+p;}).join('  \u00B7  ')+NL;
   m+=D+NL;
   m+=(b.billType==='in'?'\uD83C\uDFED *In-Company Bill*':'\uD83D\uDE9A *Out-Company Bill*')+NL;
+  if(b.billId)m+='\uD83C\uDD94 *Bill No: '+b.billId+'*'+NL;
   m+='\uD83D\uDCC5 '+(b.date||new Date().toLocaleDateString('en-IN'))+NL;
-  if(b.billId)m+='\uD83C\uDD94 '+b.billId+NL;
   if(prefs.showParty&&b.party)m+='\uD83D\uDC64 '+b.party+(prefs.showPhone&&b.partyPhone?' \u00B7 \uD83D\uDCDE'+b.partyPhone:'')+NL;
-  m+=D+NL+'\uD83D\uDCE6 *ITEMS SOLD*'+NL;
+  if(b.vehicle&&prefs.showVehicle&&b.vehicle.driver)m+='\uD83D\uDE97 '+b.vehicle.driver+(b.vehicle.phone?' \u00B7 \uD83D\uDCDE'+b.vehicle.phone:'')+(b.vehicle.number?' \u00B7 \uD83D\uDD22'+b.vehicle.number:'')+NL;
+  m+=D+NL;
+  m+='\uD83D\uDCE6 *ITEMS SOLD*'+NL;
   var sno=1;
-  (b.saleItems||[]).forEach(i=>{if(i.total>0){m+=sno+'. '+i.name+' \u00D7 '+i.qty+' @ \u20B9'+_pn(i.price)+' = *\u20B9'+_pn(i.total)+'*'+NL;sno++;}});
+  (b.saleItems||[]).forEach(function(i){if(i.total>0){m+=sno+'. '+i.name+' \u00D7 '+i.qty+' @ \u20B9'+_pn(i.price)+' = *\u20B9'+_pn(i.total)+'*'+NL;sno++;}});
   m+=NL+'\uD83D\uDCB0 *Items Total: \u20B9'+_pn(b.sT)+'*'+NL;
   if(prefs.showReplacements&&b.replItems&&b.replItems.length&&b.rT>0){
-    m+=D+NL+'\uD83D\uDD04 *REPLACEMENTS*'+NL;
+    m+=D+NL+'\uD83D\uDD04 *REPLACEMENTS (Deducted)*'+NL;
     var rno=1;
-    b.replItems.forEach(i=>{if(i.total>0){m+=rno+'. '+i.name+' \u00D7 '+i.qty+' = \u20B9'+_pn(i.total)+NL;rno++;}});
-    m+='\uD83D\uDD3B *Deducted: \u20B9'+_pn(b.rT)+'*'+NL;
+    b.replItems.forEach(function(i){if(i.total>0){m+=rno+'. '+i.name+' \u00D7 '+i.qty+' @ \u20B9'+_pn(i.price)+' = \u20B9'+_pn(i.total)+NL;rno++;}});
+    m+='\uD83D\uDD3B *Total Deducted: \u20B9'+_pn(b.rT)+'*'+NL;
   }
-  if(b.adv>0){const ml=b.payMode==='upi'?'\uD83D\uDCF1 UPI':'\uD83D\uDCB5 Cash';m+=D+NL+'\uD83D\uDCB3 Advance: \u20B9'+_pn(b.adv)+' via '+ml+NL;}
-  if(b.payLog&&b.payLog.length){m+=D+NL+'\uD83D\uDCB0 *PAYMENTS*'+NL;b.payLog.forEach(p=>{m+='\u2022 '+(p.who||'?')+' \u2014 \u20B9'+_pn(p.amount)+' ('+p.date+')'+NL;});}
+  if(b.adv>0){
+    var ml=b.payMode==='upi'?'\uD83D\uDCF1 UPI':'\uD83D\uDCB5 Cash';
+    m+=D+NL+'\uD83D\uDCB3 *Advance: \u20B9'+_pn(b.adv)+'* via '+ml+(prefs.showReceiver&&b.upiReceivedBy?' ('+b.upiReceivedBy+')':'')+NL;
+  }
+  if(b.payLog&&b.payLog.length){
+    m+=D+NL+'\uD83D\uDCB0 *PAYMENT HISTORY*'+NL;
+    b.payLog.forEach(function(p){m+='\u2022 '+(p.who||'Unknown')+' \u2014 \u20B9'+_pn(p.amount)+' ('+p.date+')'+NL;});
+  }
   m+=D+NL;
-  if(rem<0)m+='\uD83D\uDFE2 *Extra: \u20B9'+_pn(Math.abs(rem))+'*'+NL;
-  else if(rem===0)m+='\u2705 *Fully Settled*'+NL;
-  else m+='\uD83D\uDD34 *To Collect: \u20B9'+_pn(rem)+'*'+NL;
+  if(rem<0)m+='\uD83D\uDFE2 *Extra to Return: \u20B9'+_pn(Math.abs(rem))+'*'+NL;
+  else if(rem===0)m+='\u2705 *Fully Settled \u2014 No Balance Due*'+NL;
+  else m+='\uD83D\uDD34 *Final to Collect: \u20B9'+_pn(rem)+'*'+NL;
   m+=D+NL+'_\uD83D\uDE4F Jai Bhawani Industries \u2014 Jai Mata Di_';
   closeM('m-pdf');
   window.open('https://wa.me/?text='+encodeURIComponent(m),'_blank');
 }
-
-function sharePDFViaWA(){shareAsPDF();}
 
 // ── MODAL ──
 function openM(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
